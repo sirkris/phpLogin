@@ -38,5 +38,18 @@ $phplogin_failures_ban_timeout = pow( 60, 2 ) * 24;
 /* If enabled, ban and verification thresholds will be cross-referenced against user's IP address.  Use with caution!  --Kris */
 $phplogin_failures_use_ip = FALSE;
 
+/* If the login wasn't referred by another page (i.e. the user directly hit login.phplogin.php), direct to this page on successful login.  --Kris */
+$phplogin_default_redirect = "success.phplogin.php";
+
+/*
+ * If enabled, Moderators, Admins, and the Superuser will be redirected to the moderator/admin control panel upon successful 
+ * login instead of the login referral page (if applicable).  This can be useful if the site you integrated phpLogin with 
+ * doesn't contain a link to the admin control panel.  It is recommended you use this only if integrating an admin panel link 
+ * into the site would not be practical.
+ * 
+ * --Kris
+ */
+$phplogin_admin_redirect = FALSE;
+
 /* Do not modify or remove this!  --Kris */
 require( "config.init.phplogin.php" );
