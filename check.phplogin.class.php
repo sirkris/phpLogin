@@ -4,7 +4,7 @@ class phplogin_check
 	{
 		require( "config.phplogin.php" );
 		
-		$sql = new sql();
+		$sql = new phplogin_sql();
 		$db = $sql->init();
 		
 		if ( !( $where = $sql->build_where_clause( $columns, $values, $and ) ) )

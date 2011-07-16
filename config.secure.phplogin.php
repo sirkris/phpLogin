@@ -6,4 +6,4 @@
  * 
  * --Kris
  */
-$sql_pass = "Your Database Password Goes Here";
+$phplogin_sql_pass = "Your Password Goes Here";

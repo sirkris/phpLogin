@@ -6,9 +6,9 @@ class phplogin_sql
 	{
 		require( "config.phplogin.php" );
 		
-		$link = mysql_connect( $sql_host, $sql_user, $sql_pass ) or die( "Unable to connect to MySQL : " . mysql_error() );
+		$link = mysql_connect( $phplogin_sql_host, $phplogin_sql_user, $phplogin_sql_pass ) or die( "Unable to connect to MySQL : " . mysql_error() );
 		
-		mysql_select_db( $sql_db, $link ) or die( "Unable to connect to database : " . mysql_error() );
+		mysql_select_db( $phplogin_sql_db, $link ) or die( "Unable to connect to database : " . mysql_error() );
 		
 		return $link;
 	}

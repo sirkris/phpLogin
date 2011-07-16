@@ -7,7 +7,7 @@
  * --Kris
  */
 require( "config.secure.phplogin.php" );
-require_once( $sql_server . ".phplogin.class.php" );
+require_once( $phplogin_sql_server . ".phplogin.class.php" );
 
 define( "RETURN_NULL", 0 );
 define( "RETURN_RESULTS", 1 );  // Default.
