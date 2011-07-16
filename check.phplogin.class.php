@@ -1,10 +1,10 @@
-class check
+class phplogin_check
 {
 	function user_exists( $columns = array(), $values = array(), $and = TRUE )
 	{
 		require( "config.phplogin.php" );
 		
-		$sql = new sql();
+		$sql = new phplogin_sql();
 		$db = $sql->init();
 		
 		if ( !( $where = $sql->build_where_clause( $columns, $values, $and ) ) )

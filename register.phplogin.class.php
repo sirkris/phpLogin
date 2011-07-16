@@ -12,7 +12,7 @@ class phplogin_register
 			return array( "SUCCESS" => FALSE, "ERROR" => "The password encryption algorithm is not supported by the server!  Please report this to the webmaster ASAP!" );
 		}
 		
-		$check = new check();
+		$check = new phplogin_check();
 		
 		if ( $check->user_exists( array( "username", "email" ), array( $username, $email ), SQL_OR ) == TRUE )
 		{
@@ -43,7 +43,7 @@ class phplogin_register
 			}
 		}
 		
-		$sql = new sql();
+		$sql = new phplogin_sql();
 		$db = $sql->init();
 		
 		return ( $db->query( $db, "insert into phplogin_users ( username, password, pwhash, email, registered ) values ( ?, ?, ?, ?, ? )", array( $username, $pwenc, $passhash, $email, time() ), RETURN_AFFECTEDROWS ) > 0 ? array( "SUCCESS" => TRUE ) : array( "SUCCESS" => FALSE, "ERROR" => "Insertion query failed!" ) );

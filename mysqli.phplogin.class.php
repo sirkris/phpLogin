@@ -1,12 +1,12 @@
 <?php
 
-class sql
+class phplogin_sql
 {
 	function init()
 	{
 		require( "config.phplogin.php" );
 		
-		$db = new mysqli( $sql_host, $sql_user, $sql_pass, $sql_db );
+		$db = new mysqli( $phplogin_sql_host, $phplogin_sql_user, $phplogin_sql_pass, $phplogin_sql_db );
 		
 		return $db;
 	}
