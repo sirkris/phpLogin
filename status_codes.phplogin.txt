@@ -1,0 +1,36 @@
+phpLogin User Status Codes
+---------------------------
+
+This guide is provided for reference purposes only.  It is not used by any scripts.
+
+This document applies to the "status" integer column in the db table "phplogin_users."
+
+
+Codes:
+
+-2:  Reserved.  Use this status to create user accounts that cannot be logged into.   This can be 
+useful for linking to AI players in a game or reserving a username for later use.  Though this can 
+also technically be used to create "unacceptable" usernames, it should not be used for that purpose.  
+Instead, it is recommended that you add any such usernames to the array of invalid usernames in 
+phplogin_check::valid_username() in check.phplogin.class.php.
+
+-1:  Banned.  A user in this status is unable to login or authenticate.
+
+0 :  Pending.  If a user has registered but not yet confirmed their email address (if applicable), 
+this will be their status.  Users in Pending status are not able to login or authenticate.
+
+1 :  Active.  This is the "standard" status for any normal user.
+
+2 :  Moderator.  A Moderator user inherits all the privileges of Active status plus the ability to 
+edit/ban users at or below Active status.  Moderators cannot create other moderators, nor can they 
+actually delete a user account from the database.
+
+3 :  Admin.  A user with this status inherits all the privileges of Moderator status plus 
+administrator privileges.  An Admin can modify and delete users at or below Moderator status.  
+An Admin can create Moderators but not Admins.  Admins cannot modify or delete other admins.
+
+4 :  Superuser.  The superuser inherits all Admin privileges plus the ability to create, 
+modify, and destroy other admins.  The first user registered is automatically set as 
+the Superuser (see INSTALL file for details).  The superuser cannot create other 
+superusers, nor can the superuser delete his account or remove his superuser status.  
+It is possible to manually create another superuser, but NOT recommended!
