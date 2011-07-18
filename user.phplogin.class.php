@@ -44,4 +44,14 @@ class phplogin_user
 			$this->userdata = $_SESSION["phplogin_userdata"];
 		}
 	}
+	
+	function load_data()
+	{
+		if ( !isset( session_id() ) )
+		{
+			return FALSE;
+		}
+		
+		
+	}
 }
