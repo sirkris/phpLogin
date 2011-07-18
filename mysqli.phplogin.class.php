@@ -167,4 +167,9 @@ class phplogin_sql
 		
 		return array( 0 => $where, 1 => $values );
 	}
+	
+	function addescape( $string )
+	{
+		return addslashes( $string );
+	}
 }

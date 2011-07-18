@@ -44,6 +44,9 @@ $phplogin_failures_use_ip = FALSE;
 /* If the login wasn't referred by another page (i.e. the user directly hit login.phplogin.php), direct to this page on successful login.  --Kris */
 $phplogin_default_redirect = "success.phplogin.php";
 
+/* Number of seconds before session data must be repopulated from database.  Lower value = better security & slower performance.  --Kris */
+$phplogin_session_repopulate = 300;
+
 /*
  * If enabled, Moderators, Admins, and the Superuser will be redirected to the moderator/admin control panel upon successful 
  * login instead of the login referral page (if applicable).  This can be useful if the site you integrated phpLogin with 
