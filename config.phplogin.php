@@ -10,6 +10,9 @@ $phplogin_sql_db = "phplogin";
 /* Email validation settings.  --Kris */
 $phplogin_requiredns = TRUE;
 
+/* If enabled, new users will receive a confirmation email with a link required to activate their account (does not apply to Superuser).  --Kris */
+$phplogin_activation_email = TRUE;
+
 /* Password encryption method.  --Kris */
 // Note - You can safely change this without deprecating any existing stored passwords.  --Kris
 $phplogin_passhash = "sha512";  // Currently supported:  md5, sha1, sha256, sha512
