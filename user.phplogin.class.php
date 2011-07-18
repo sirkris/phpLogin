@@ -29,7 +29,7 @@ class phplogin_user
 			/* Check the database to rebuild session data, if possible.  --Kris */
 			if ( isset( session_id() ) )
 			{
-				// TODO
+				$this->populate_session();
 			}
 		}
 		
@@ -45,13 +45,27 @@ class phplogin_user
 		}
 	}
 	
-	function load_data()
+	function load_data( $select = "userid, username, email, registered, loggedon, loggedonsince, lastaction, timeoutmin, status" )
 	{
 		if ( !isset( session_id() ) )
 		{
 			return FALSE;
 		}
 		
+		require( "config.phplogin.php" );
 		
+		$sql = new phplogin_sql();
+		
+		return $sql->query( "select $select from phplogin_users where phpsessid = ?", array( $sql->addescape( session_id() ) ) );
+	}
+	
+	function populate_session()
+	{
+		$_SESSION["phplogin_userdata"] = $this->load_data();
+		
+		foreach ( $_SESSION["phplogin_userdata"] as $sukey => $suval )
+		{
+			$_SESSION["phplogin_" . $sukey] = $suval;
+		}
 	}
 }
