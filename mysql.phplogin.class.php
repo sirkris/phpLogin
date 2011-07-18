@@ -1,19 +1,26 @@
 <?php
 
+define( "RETURN_NULL", 0 );
+define( "RETURN_RESULTS", 1 );  // Default.
+define( "RETURN_AFFECTEDROWS", 2 );
+define( "RETURN_NUMROWS", 3 );
+define( "RETURN_OBJECT", 4 );
+
+define( "SQL_AND", TRUE );
+define( "SQL_OR", FALSE );
+
 class phplogin_sql
 {
-	function init()
+	function __construct()
 	{
 		require( "config.phplogin.php" );
 		
-		$link = mysql_connect( $phplogin_sql_host, $phplogin_sql_user, $phplogin_sql_pass ) or die( "Unable to connect to MySQL : " . mysql_error() );
+		$this->link = mysql_connect( $phplogin_sql_host, $phplogin_sql_user, $phplogin_sql_pass ) or die( "Unable to connect to MySQL : " . mysql_error() );
 		
-		mysql_select_db( $phplogin_sql_db, $link ) or die( "Unable to connect to database : " . mysql_error() );
-		
-		return $link;
+		mysql_select_db( $phplogin_sql_db, $this->link ) or die( "Unable to connect to database : " . mysql_error() );
 	}
 	
-	function query( $link, $query, $params = array(), $returntype = 1 )
+	function query( $query, $params = array(), $returntype = 1 )
 	{
 		/* Prepared statements aren't supported, so let's just cheat and convert them.  --Kris */
 		if ( !empty( $params ) )
@@ -111,9 +118,9 @@ class phplogin_sql
 		return $resdata;
 	}
 	
-	function close( $link )
+	function close()
 	{
-		return mysql_close( $link );
+		return mysql_close( $this->link );
 	}
 	
 	function build_where_clause( $columns = array(), $values = array(), $and = TRUE )

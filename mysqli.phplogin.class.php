@@ -1,19 +1,26 @@
 <?php
 
+define( "RETURN_NULL", 0 );
+define( "RETURN_RESULTS", 1 );  // Default.
+define( "RETURN_AFFECTEDROWS", 2 );
+define( "RETURN_NUMROWS", 3 );
+define( "RETURN_OBJECT", 4 );
+
+define( "SQL_AND", TRUE );
+define( "SQL_OR", FALSE );
+
 class phplogin_sql
 {
-	function init()
+	function __construct()
 	{
 		require( "config.phplogin.php" );
 		
-		$db = new mysqli( $phplogin_sql_host, $phplogin_sql_user, $phplogin_sql_pass, $phplogin_sql_db );
-		
-		return $db;
+		$this->db = new mysqli( $phplogin_sql_host, $phplogin_sql_user, $phplogin_sql_pass, $phplogin_sql_db );
 	}
 	
-	function query( $db, $query, $params = array(), $returntype = 1 )
+	function query( $query, $params = array(), $returntype = 1 )
 	{
-		$stmt = $db->prepare( $query ) or die( "Error preparing SQL statement" );
+		$stmt = $this->db->prepare( $query ) or die( "Error preparing SQL statement" );
 		
 		$args = array();
 		$args[0] = NULL;
@@ -132,9 +139,9 @@ class phplogin_sql
 		return $array;
 	}
 	
-	function close( $db )
+	function close()
 	{
-		return $db->close();
+		return $this->db->close();
 	}
 	
 	function build_where_clause( $columns = array(), $values = array(), $and = TRUE )

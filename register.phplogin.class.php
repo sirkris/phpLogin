@@ -44,9 +44,8 @@ class phplogin_register
 		}
 		
 		$sql = new phplogin_sql();
-		$db = $sql->init();
 		
-		return ( $db->query( $db, "insert into phplogin_users ( username, password, pwhash, email, registered ) values ( ?, ?, ?, ?, ? )", array( $username, $pwenc, $passhash, $email, time() ), RETURN_AFFECTEDROWS ) > 0 ? array( "SUCCESS" => TRUE ) : array( "SUCCESS" => FALSE, "ERROR" => "Insertion query failed!" ) );
+		return ( $sql->query( "insert into phplogin_users ( username, password, pwhash, email, registered ) values ( ?, ?, ?, ?, ? )", array( $username, $pwenc, $passhash, $email, time() ), RETURN_AFFECTEDROWS ) > 0 ? array( "SUCCESS" => TRUE ) : array( "SUCCESS" => FALSE, "ERROR" => "Insertion query failed!" ) );
 	}
 	
 	function encrypt_password( $password, $hashtype )
