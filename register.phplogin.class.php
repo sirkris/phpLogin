@@ -13,7 +13,7 @@ class phplogin_register
 		
 		$check = new phplogin_check();
 		
-		if ( $check->user_exists( array( "username", "email" ), array( $username, $email ), SQL_OR ) == TRUE )
+		if ( $check->user_exists( array( "username", "email" ), array( $username, $email ), PHPLOGIN_SQL_OR ) == TRUE )
 		{
 			return array( "SUCCESS" => FALSE, "ERROR" => "Username and/or email is already registered!" );
 		}
@@ -44,6 +44,6 @@ class phplogin_register
 		
 		$sql = new phplogin_sql();
 		
-		return ( $sql->query( "insert into phplogin_users ( username, password, pwhash, email, registered ) values ( ?, ?, ?, ?, ? )", array( $username, $pwenc, $passhash, $email, time() ), RETURN_AFFECTEDROWS ) > 0 ? array( "SUCCESS" => TRUE ) : array( "SUCCESS" => FALSE, "ERROR" => "Insertion query failed!" ) );
+		return ( $sql->query( "insert into phplogin_users ( username, password, pwhash, email, registered ) values ( ?, ?, ?, ?, ? )", array( $username, $pwenc, $passhash, $email, time() ), PHPLOGIN_SQL_RETURN_AFFECTEDROWS ) > 0 ? array( "SUCCESS" => TRUE ) : array( "SUCCESS" => FALSE, "ERROR" => "Insertion query failed!" ) );
 	}
 }

@@ -1,13 +1,13 @@
 <?php
 
-define( "RETURN_NULL", 0 );
-define( "RETURN_RESULTS", 1 );  // Default.
-define( "RETURN_AFFECTEDROWS", 2 );
-define( "RETURN_NUMROWS", 3 );
-define( "RETURN_OBJECT", 4 );
+define( "PHPLOGIN_SQL_RETURN_NULL", 0 );
+define( "PHPLOGIN_SQL_RETURN_RESULTS", 1 );  // Default.
+define( "PHPLOGIN_SQL_RETURN_AFFECTEDROWS", 2 );
+define( "PHPLOGIN_SQL_RETURN_NUMROWS", 3 );
+define( "PHPLOGIN_SQL_RETURN_OBJECT", 4 );
 
-define( "SQL_AND", TRUE );
-define( "SQL_OR", FALSE );
+define( "PHPLOGIN_SQL_AND", TRUE );
+define( "PHPLOGIN_SQL_OR", FALSE );
 
 class phplogin_sql
 {
