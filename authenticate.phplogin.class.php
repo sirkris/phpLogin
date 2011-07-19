@@ -22,7 +22,7 @@ class phplogin_authenticate
 		
 		$pwenc = phplogin_encryption::encrypt_string( $password, $pwhash );
 		
-		$rows = $sql->query( "select userid from phplogin_users where username = ? AND password = ?", array( $sql->addescape( $username ), $sql->addescape( $pwenc ) ), RETURN_NUMROWS );
+		$rows = $sql->query( "select userid from phplogin_users where username = ? AND password = ?", array( $sql->addescape( $username ), $sql->addescape( $pwenc ) ), PHPLOGIN_SQL_RETURN_NUMROWS );
 		
 		return ( $rows == 1 ? TRUE : FALSE );
 	}
@@ -55,7 +55,7 @@ class phplogin_authenticate
 		if ( $_SESSION["phplogin_lastaction"] + ($_SESSION["phplogin_timeoutmin"] * 60) <= time() 
 			|| self::has_privilege( PHPLOGIN_STATUS_ACTIVE ) == FALSE )
 		{
-			$user->logout()
+			$user->logout();
 			return FALSE;
 		}
 		

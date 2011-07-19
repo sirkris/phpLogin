@@ -14,7 +14,7 @@ class phplogin_check
 			return FALSE;
 		}
 		
-		return ( $sql->query( $db, "select userid from phplogin_users where " . $where[0], $where[1], RETURN_NUMROWS ) > 0 ? TRUE : FALSE );
+		return ( $sql->query( $db, "select userid from phplogin_users where " . $where[0], $where[1], PHPLOGIN_SQL_RETURN_NUMROWS ) > 0 ? TRUE : FALSE );
 	}
 	
 	function valid_email( $email )

@@ -106,7 +106,7 @@ class phplogin_user
 		{
 			$sql = new phplogin_sql();
 			
-			$sql->query( "update phplogin_users set lastaction = ? where phpsessid = ?", array( strval( time() ), $sql->addescape( $session_id ) ), RETURN_NULL );
+			$sql->query( "update phplogin_users set lastaction = ? where phpsessid = ?", array( strval( time() ), $sql->addescape( $session_id ) ), PHPLOGIN_SQL_RETURN_NULL );
 		}
 	}
 	
@@ -124,7 +124,7 @@ class phplogin_user
 		
 		$sql = new phplogin_sql();
 		
-		$affrows = $sql->query( "update phplogin_users set loggedon = 0, loggedonsince = '0', phpsessid = '' where phpsessid = ?", array( $sql->addescape( $session_id ) ), RETURN_AFFECTEDROWS );
+		$affrows = $sql->query( "update phplogin_users set loggedon = 0, loggedonsince = '0', phpsessid = '' where phpsessid = ?", array( $sql->addescape( $session_id ) ), PHPLOGIN_SQL_RETURN_AFFECTEDROWS );
 		
 		return ($affrows == 1 ? TRUE : FALSE);
 	}
