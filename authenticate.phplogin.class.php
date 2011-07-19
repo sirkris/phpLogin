@@ -59,25 +59,73 @@ class phplogin_authenticate
 	/* Determine if the user is allowed to login (status > 0).  --Kris */
 	function allowed()
 	{
+		require( "config.phplogin.php" );
 		
+		$session = new phplogin_session();
+		$session->start();
+		
+		$session_id = session_id();
+		
+		if ( !isset( $session_id ) )
+		{
+			return FALSE;
+		}
+		
+		return ($_SESSION["phplogin_status"] >= 1 ? TRUE : FALSE);
 	}
 	
 	/* Determine if the user has moderator privileges.  --Kris */
 	function is_moderator()
 	{
+		require( "config.phplogin.php" );
 		
+		$session = new phplogin_session();
+		$session->start();
+		
+		$session_id = session_id();
+		
+		if ( !isset( $session_id ) )
+		{
+			return FALSE;
+		}
+		
+		return ($_SESSION["phplogin_status"] >= 2 ? TRUE : FALSE);
 	}
 	
 	/* Determine if the user has admin privileges.  --Kris */
 	function is_admin()
 	{
+		require( "config.phplogin.php" );
 		
+		$session = new phplogin_session();
+		$session->start();
+		
+		$session_id = session_id();
+		
+		if ( !isset( $session_id ) )
+		{
+			return FALSE;
+		}
+		
+		return ($_SESSION["phplogin_status"] >= 3 ? TRUE : FALSE);
 	}
 	
 	/* Determine if the user has superuser privileges.  --Kris */
 	function is_superuser()
 	{
+		require( "config.phplogin.php" );
 		
+		$session = new phplogin_session();
+		$session->start();
+		
+		$session_id = session_id();
+		
+		if ( !isset( $session_id ) )
+		{
+			return FALSE;
+		}
+		
+		return ($_SESSION["phplogin_status"] == 4 ? TRUE : FALSE);
 	}
 	
 	/* Retrieve the correct password encryption method for the user.  --Kris */
