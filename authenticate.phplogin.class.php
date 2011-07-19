@@ -89,6 +89,6 @@ class phplogin_authenticate
 		
 		$sql = new phpmeow_sql();
 		
-		return $sql->query( "select pwhash from phplogin_users where username = ?", $sql->addescape( $username ) );
+		return $sql->query( "select pwhash from phplogin_users where username = ?", array( $sql->addescape( $username ) ) );
 	}
 }
