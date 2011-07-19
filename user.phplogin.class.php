@@ -31,10 +31,6 @@ class phplogin_user
 		{
 			$this->populate_session();
 		}
-		else
-		{
-			$this->update_lastaction();
-		}
 		
 		/* Populate common data from session for convenience.  --Kris */
 		if ( isset( $_SESSION["phplogin_userid"] ) )
@@ -80,8 +76,6 @@ class phplogin_user
 	{
 		require( "config.phplogin.php" );
 		
-		$this->update_lastaction();
-		
 		$_SESSION["phplogin_userdata"] = $this->load_data();
 		
 		/* If user has been logged-out, banned, etc; clear the session data.  --Kris */
@@ -106,7 +100,9 @@ class phplogin_user
 		
 		$session_id = session_id();
 		
-		if ( $phplogin_ping_db == TRUE && isset( $_SESSION["phplogin_userid"] ) )
+		$_SESSION["phplogin_lastaction"] = time();
+		
+		if ( $phplogin_ping_db == TRUE && isset( $session_id ) )
 		{
 			$sql = new phplogin_sql();
 			

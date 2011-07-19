@@ -22,7 +22,38 @@ class phplogin_authenticate
 	/* Determine if session data indicates a logged-in user.  --Kris */
 	function session()
 	{
+		require( "config.phplogin.php" );
 		
+		$session_id = session_id();
+		
+		$user = new user();
+		
+		if ( !isset( $user->userdata ) || !isset( $_SESSION["phplogin_userdata"] ) 
+			|| !isset( $_SESSION["phplogin_timeoutmin"] ) 
+			|| !isset( $_SESSION["phplogin_sessiontimeout"] ) 
+			|| !isset( $session_id ) 
+			|| !is_numeric( $_SESSION["phplogin_userid"] ) 
+			|| $_SESSION["phplogin_userid"] <= 0 )
+		{
+			$user->clear_session();
+			return FALSE;
+		}
+		
+		if ( $_SESSION["phplogin_loggedon"] != 1 )
+		{
+			return FALSE;
+		}
+		
+		if ( $_SESSION["phplogin_lastaction"] + ($_SESSION["phplogin_timeoutmin"] * 60) <= time() 
+			|| self::allowed() == FALSE )
+		{
+			$user->logout()
+			return FALSE;
+		}
+		
+		$user->update_lastaction();
+		
+		return TRUE;
 	}
 	
 	/* Determine if the user is allowed to login (status > 0).  --Kris */
