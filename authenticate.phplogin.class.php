@@ -1,5 +1,13 @@
 <?php
 
+define( "PHPLOGIN_STATUS_RESERVED", -2 );
+define( "PHPLOGIN_STATUS_BANNED", -1 );
+define( "PHPLOGIN_STATUS_PENDING", 0 );
+define( "PHPLOGIN_STATUS_ACTIVE", 1 );
+define( "PHPLOGIN_STATUS_MODERATOR", 2 );
+define( "PHPLOGIN_STATUS_ADMIN", 3 );
+define( "PHPLOGIN_STATUS_SUPERUSER", 4 );
+
 class phplogin_authenticate
 {
 	/* Validate username/password.  --Kris */
@@ -45,7 +53,7 @@ class phplogin_authenticate
 		}
 		
 		if ( $_SESSION["phplogin_lastaction"] + ($_SESSION["phplogin_timeoutmin"] * 60) <= time() 
-			|| self::allowed() == FALSE )
+			|| self::has_privilege( PHPLOGIN_STATUS_ACTIVE ) == FALSE )
 		{
 			$user->logout()
 			return FALSE;
@@ -56,8 +64,8 @@ class phplogin_authenticate
 		return TRUE;
 	}
 	
-	/* Determine if the user is allowed to login (status > 0).  --Kris */
-	function allowed()
+	/* Determine if user meets or exceeds a specified access privilege (shouldn't be used for status <= 0).  --Kris */
+	function has_privilege( $privilege )
 	{
 		require( "config.phplogin.php" );
 		
@@ -71,61 +79,7 @@ class phplogin_authenticate
 			return FALSE;
 		}
 		
-		return ($_SESSION["phplogin_status"] >= 1 ? TRUE : FALSE);
-	}
-	
-	/* Determine if the user has moderator privileges.  --Kris */
-	function is_moderator()
-	{
-		require( "config.phplogin.php" );
-		
-		$session = new phplogin_session();
-		$session->start();
-		
-		$session_id = session_id();
-		
-		if ( !isset( $session_id ) )
-		{
-			return FALSE;
-		}
-		
-		return ($_SESSION["phplogin_status"] >= 2 ? TRUE : FALSE);
-	}
-	
-	/* Determine if the user has admin privileges.  --Kris */
-	function is_admin()
-	{
-		require( "config.phplogin.php" );
-		
-		$session = new phplogin_session();
-		$session->start();
-		
-		$session_id = session_id();
-		
-		if ( !isset( $session_id ) )
-		{
-			return FALSE;
-		}
-		
-		return ($_SESSION["phplogin_status"] >= 3 ? TRUE : FALSE);
-	}
-	
-	/* Determine if the user has superuser privileges.  --Kris */
-	function is_superuser()
-	{
-		require( "config.phplogin.php" );
-		
-		$session = new phplogin_session();
-		$session->start();
-		
-		$session_id = session_id();
-		
-		if ( !isset( $session_id ) )
-		{
-			return FALSE;
-		}
-		
-		return ($_SESSION["phplogin_status"] == 4 ? TRUE : FALSE);
+		return ( $_SESSION["phplogin_status"] >= $privilege ? TRUE : FALSE );
 	}
 	
 	/* Retrieve the correct password encryption method for the user.  --Kris */
