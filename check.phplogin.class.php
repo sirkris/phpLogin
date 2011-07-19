@@ -1,3 +1,5 @@
+<?php
+
 class phplogin_check
 {
 	function user_exists( $columns = array(), $values = array(), $and = TRUE )
