@@ -109,4 +109,23 @@ class phplogin_user
 			$sql->query( "update phplogin_users set lastaction = ? where phpsessid = ?", array( strval( time() ), $sql->addescape( $session_id ) ), RETURN_NULL );
 		}
 	}
+	
+	/* Logout the user.  Returns boolean success status.  --Kris */
+	function logout()
+	{
+		require( "config.phplogin.php" );
+		
+		$session_id = session_id();
+		
+		if ( !isset( $session_id ) )
+		{
+			return FALSE;
+		}
+		
+		$sql = new phplogin_sql();
+		
+		$affrows = $sql->query( "update phplogin_users set loggedon = 0, loggedonsince = '0', phpsessid = '' where phpsessid = ?", array( $sql->addescape( $session_id ) ), RETURN_AFFECTEDROWS );
+		
+		return ($affrows == 1 ? TRUE : FALSE);
+	}
 }
