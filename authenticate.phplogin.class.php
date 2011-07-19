@@ -15,7 +15,7 @@ class phplogin_authenticate
 	{
 		require( "config.phplogin.php" );
 		
-		$sql = new phpmeow_sql();
+		$sql = new phplogin_sql();
 		$res = $sql->get_passhash( $username );
 		
 		$pwhash = $res["pwhash"];
@@ -85,9 +85,9 @@ class phplogin_authenticate
 	/* Retrieve the correct password encryption method for the user.  --Kris */
 	function get_passhash( $username )
 	{
-		require( "config.phpmeow.php" );
+		require( "config.phplogin.php" );
 		
-		$sql = new phpmeow_sql();
+		$sql = new phplogin_sql();
 		
 		return $sql->query( "select pwhash from phplogin_users where username = ?", array( $sql->addescape( $username ) ) );
 	}
