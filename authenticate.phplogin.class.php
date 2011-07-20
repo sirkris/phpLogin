@@ -16,7 +16,7 @@ class phplogin_authenticate
 		require( "config.phplogin.php" );
 		
 		$sql = new phplogin_sql();
-		$res = $sql->get_passhash( $username );
+		$res = phplogin_authenticate::get_passhash( $username );
 		
 		$pwhash = $res["pwhash"];
 		
@@ -31,6 +31,9 @@ class phplogin_authenticate
 	function session()
 	{
 		require( "config.phplogin.php" );
+		
+		$session = new phplogin_session();
+		$session->start();
 		
 		$session_id = session_id();
 		

@@ -248,4 +248,82 @@ class phplogin_user
 		
 		return array( "Success" => TRUE );
 	}
+	
+	/* Change the user's password.  Requires either old password or reset code (stored in phplogin_users under phpsessid).  --Kris */
+	function change_password( $newpass, $newpassretype, $oldpass, $code = NULL )
+	{
+		require( "config.phplogin.php" );
+		
+		if ( $oldpass == NULL && $code == NULL )
+		{
+			return array( "Success" => FALSE, "Reason" => "Access denied." );
+		}
+		
+		if ( strlen( $newpass ) < 6 )
+		{
+			return array( "Success" => FALSE, "Reason" => "Password must be at least 6 characters." );
+		}
+		
+		if ( strcmp( $newpass, $newpassretype ) )
+		{
+			return array( "Success" => FALSE, "Reason" => "New password and retype must match." );
+		}
+		
+		$sql = new phplogin_sql();
+		
+		if ( phplogin_authenticate::session() == TRUE )
+		{
+			if ( $oldpass == NULL )
+			{
+				return array( "Success" => FALSE, "Reason" => "Access denied." );
+			}
+			
+			$res = phplogin_authenticate::get_passhash( $_SESSION["phplogin_username"] );
+			
+			$pwhash = $res["pwhash"];
+			
+			$pwenc = phplogin_encryption::encrypt_string( $oldpass, $pwhash );
+			
+			$rows = $sql->query( "select userid from phplogin_users where username = ? AND password = ?", array( $_SESSION["phplogin_username"], $pwenc ), PHPLOGIN_SQL_RETURN_NUMROWS );
+			
+			if ( $rows != 1 )
+			{
+				return array( "Success" => FALSE, "Reason" => "Access denied." );
+			}
+			
+			$where = "username = ?";
+			$baseparams = array( $sql->addescape( $_SESSION["phplogin_username"] ) );
+		}
+		else
+		{
+			if ( $code == NULL )
+			{
+				return array( "Success" => FALSE, "Reason" => "Access denied." );
+			}
+			
+			$rows = $sql->query( "select userid from phplogin_users where phpsessid = ?", $sql->addescape( $code ), PHPLOGIN_SQL_RETURN_NUMROWS );
+			
+			if ( $rows != 1 )
+			{
+				return array( "Success" => FALSE, "Reason" => "Access denied." );
+			}
+			
+			$where = "phpsessid = ?";
+			$baseparams = array( $sql->addescape( $code ) );
+		}
+		
+		/* All sanity checks passed.  Change the password using the current encryption settings.  --Kris */
+		$newpwenc = phplogin_encryption::encrypt_string( $newpass, $phplogin_passhash );
+		
+		$params = array( $newpwenc, $phplogin_passhash );
+		
+		foreach ( $baseparams as $param )
+		{
+			$params[] = $param;
+		}
+		
+		$affrows = $sql->query( "update phplogin_users set password = ?, pwhash = ? where $where", $params, PHPLOGIN_SQL_RETURN_AFFECTEDROWS );
+		
+		return ( $affrows == 1 ? array( "Success" => TRUE ) : array( "Success" => FALSE, "Reason" => "Unknown error writing to database!  Please contact the webmaster." ) );
+	}
 }
