@@ -326,4 +326,27 @@ class phplogin_user
 		
 		return ( $affrows == 1 ? array( "Success" => TRUE ) : array( "Success" => FALSE, "Reason" => "Unknown error writing to database!  Please contact the webmaster." ) );
 	}
+	
+	function activate( $code )
+	{
+		require( "config.phplogin.php" );
+		
+		if ( $code == NULL )
+		{
+			return array( "Success" => FALSE, "Reason" => "Access denied." );
+		}
+		
+		$sql = new phplogin_sql();
+		
+		$rows = $sql->query( "select userid from phplogin_users where code = ? AND status = 0", array( $sql->addescape( $code ) ), PHPLOGIN_SQL_RETURN_NUMROWS );
+		
+		if ( $rows != 1 )
+		{
+			return array( "Success" => FALSE, "Reason" => "Either the code is invalid or this account has already been activated." );
+		}
+		
+		$affrows = $sql->query( "update phplogin_users set status = 1 where code = ?", array( $sql->addescape( $code ) ), PHPLOGIN_SQL_RETURN_AFFECTEDROWS );
+		
+		return ( $affrows == 1 ? array( "Success" => TRUE ) : array( "Success" => FALSE, "Reason" => "Unkonwn error writing to database!  Please contact the webmaster." ) );
+	}
 }
