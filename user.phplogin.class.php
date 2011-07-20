@@ -110,6 +110,44 @@ class phplogin_user
 		}
 	}
 	
+	/* Login the user.  --Kris */
+	function login( $username, $password )
+	{
+		require( "config.phplogin.php" );
+		
+		$session = new phplogin_session();
+		$session->start();
+		
+		$session_id = session_id();
+		
+		/* Sessions are required.  --Kris */
+		if ( !isset( $session_id ) || $session_id == NULL )
+		{
+			return array( "Success" => FALSE, "Reason" => "Unable to retrieve session_id!" );
+		}
+		
+		if ( phplogin_authenticate::login( $username, $password ) == FALSE )
+		{
+			return array( "Success" => FALSE, "Reason" => "Incorrect username and/or password!" );
+		}
+		
+		$sql = new phplogin_sql();
+		
+		$query = "update phplogin_users set loggedon = 1, phpsessid = ?, loggedonsince = ?, lastaction = ?";
+		$query .= " where username = ?";
+		$affrows = $sql->query( $query, array( $sql->addescape( $session_id ), time(), time(), $sql->addescape( $username ) ), PHPLOGIN_SQL_RETURN_AFFECTEDROWS );
+		
+		/* Just in case there's a problem communicating with the database.  --Kris */
+		if ( $affrows == 0 )
+		{
+			return array( "Success" => FALSE, "Reason" => "Unknown database error!" );
+		}
+		
+		$this->populate_session();
+		
+		return array( "Success" => TRUE );
+	}
+	
 	/* Logout the user.  Returns boolean success status.  --Kris */
 	function logout()
 	{
@@ -126,6 +164,6 @@ class phplogin_user
 		
 		$affrows = $sql->query( "update phplogin_users set loggedon = 0, loggedonsince = '0', phpsessid = '' where phpsessid = ?", array( $sql->addescape( $session_id ) ), PHPLOGIN_SQL_RETURN_AFFECTEDROWS );
 		
-		return ($affrows == 1 ? TRUE : FALSE);
+		return ( $affrows == 1 ? TRUE : FALSE );
 	}
 }
