@@ -7,6 +7,11 @@ $phplogin_sql_host = "127.0.0.1";
 $phplogin_sql_user = "kris";
 $phplogin_sql_db = "phplogin";
 
+/* Email header settings.  --Kris */
+$phplogin_mailfrom = "sendmail_from@your-domain.com";
+$phplogin_replyto = "sendmail_from@your-domain.com";
+$phplogin_maildomain = "your-domain.com";
+
 /* Email validation settings.  --Kris */
 $phplogin_requiredns = TRUE;
 
