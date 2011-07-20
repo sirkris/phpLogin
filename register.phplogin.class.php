@@ -6,7 +6,7 @@ class phplogin_register
 	{
 		require( "config.phplogin.php" );
 		
-		if ( $pwenc = phplogin_encryption::encrypt_string( $password, $passhash ) == FALSE )
+		if ( $pwenc = phplogin_encryption::encrypt_string( $password, $phplogin_passhash ) == FALSE )
 		{
 			return array( "SUCCESS" => FALSE, "ERROR" => "The password encryption algorithm is not supported by the server!  Please report this to the webmaster ASAP!" );
 		}
@@ -33,7 +33,7 @@ class phplogin_register
 			}
 			
 			/* Validate the email hostname.  --Kris */
-			if ( $requiredns == TRUE )
+			if ( $phplogin_requiredns == TRUE )
 			{
 				if ( $check->email_dns_exists( $email ) == FALSE )
 				{
@@ -44,6 +44,6 @@ class phplogin_register
 		
 		$sql = new phplogin_sql();
 		
-		return ( $sql->query( "insert into phplogin_users ( username, password, pwhash, email, registered ) values ( ?, ?, ?, ?, ? )", array( $username, $pwenc, $passhash, $email, time() ), PHPLOGIN_SQL_RETURN_AFFECTEDROWS ) > 0 ? array( "SUCCESS" => TRUE ) : array( "SUCCESS" => FALSE, "ERROR" => "Insertion query failed!" ) );
+		return ( $sql->query( "insert into phplogin_users ( username, password, pwhash, email, registered ) values ( ?, ?, ?, ?, ? )", array( $username, $pwenc, $phplogin_passhash, $email, time() ), PHPLOGIN_SQL_RETURN_AFFECTEDROWS ) > 0 ? array( "SUCCESS" => TRUE ) : array( "SUCCESS" => FALSE, "ERROR" => "Insertion query failed!" ) );
 	}
 }
