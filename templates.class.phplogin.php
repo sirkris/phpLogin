@@ -16,7 +16,7 @@ class phplogin_templates
 	}
 	
 	/* Display the specified template (loads $phplogin_templates_dir/$args[0].template.phplogin.html).  --Kris */
-	function display( $template, $args = array() )
+	function display( $template )
 	{
 		require( "config.phplogin.php" );
 		
@@ -30,7 +30,7 @@ class phplogin_templates
 		}
 		
 		$filedata = $this->load( $templatefile ) or return array( "Success" => FALSE, "Reason" => "Error loading template $template for read!" );
-		$filedata = $this->parse( $filedata, $args ) or return array( "Success" => FALSE, "Reason" => "Error parsing template $template!" );
+		$filedata = $this->parse( $filedata ) or return array( "Success" => FALSE, "Reason" => "Error parsing template $template!" );
 		
 		print $filedata;
 		
@@ -44,14 +44,14 @@ class phplogin_templates
 	}
 	
 	/* Parse the template file.  See template_syntax.phplogin.txt for specifications.  --Kris */
-	function parse( $filedata, $args = array() )
+	function parse( $filedata )
 	{
-		if ( !is_array( $args ) )
+		if ( !is_array( $this->args ) )
 		{
 			return FALSE;
 		}
 		
-		if ( empty( $args ) )
+		if ( empty( $this->args ) )
 		{
 			return $filedata;
 		}
