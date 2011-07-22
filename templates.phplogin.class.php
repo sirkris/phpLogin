@@ -31,10 +31,16 @@ class phplogin_templates
 			return array( "Success" => FALSE, "Reason" => "Template file '$templatefile' does not exist or is not readable!" );
 		}
 		
-		$filedata = $this->load( $templatefile ) or return array( "Success" => FALSE, "Reason" => "Error loading template $template for read!" );
+		if ( !( $filedata = $this->load( $templatefile ) ) )
+		{
+			return array( "Success" => FALSE, "Reason" => "Error loading template $template for read!" );
+		}
 		
 		$this->customvars["phpLoginTemplateName"] = $template;
-		$filedata = $this->parse( $filedata ) or return array( "Success" => FALSE, "Reason" => "Error parsing template $template!" );
+		if ( !( $filedata = $this->parse( $filedata ) ) )
+		{
+			return array( "Success" => FALSE, "Reason" => "Error parsing template $template!" );
+		}
 		
 		print $filedata;
 		
@@ -50,6 +56,8 @@ class phplogin_templates
 	/* Parse the template file.  See template_syntax.phplogin.txt for specifications.  --Kris */
 	function parse( $filedata )
 	{
+		require( "config.phplogin.php" );
+		
 		if ( !is_array( $this->customvars ) )
 		{
 			return FALSE;
