@@ -1,0 +1,95 @@
+phpLogin Templates Specification
+---------------------------------
+
+This guide is provided for reference purposes only.  It is not used by any scripts.
+
+This document applies to the HTML files contained in the templates directory (defined in config.phplogin.php).
+
+
+1. Introduction
+
+Rather than use something complex like Smarty, I decided to keep the templates as simple as possible.  As such, 
+it made more sense to just write the code for them myself.
+
+While these templates might not be as robust as Smarty, they really don't need to be.  Most of this stuff is just 
+static forms HTML anyway.  But for stuff like displaying the username, login status, etc; we'll want the ability 
+to do a simple dynamic string replace here and there.
+
+I designed this to be as simple as possible so that designers with no programming or scripting background will be 
+able to work with this without confusion.  Nothing too fancy.
+
+
+2. Naming Convention
+
+Each template file must be named <template name>.template.phplogin.html and placed within the templates directory 
+defined in config.phplogin.php.
+
+For example, the template "Kris_Rocks_My_World" would be named Kris_Rocks_My_World.template.phplogin.html and 
+would be located in the phplogin_templates/ subdirectory.
+
+
+3. Template File Syntax
+
+Insultingly simple.
+
+Open Tag:  {@
+Close Tag:  }
+
+Between the open/close tag rests the variable name containing the string you wish to display.
+
+For example, if $phplogin_templates->customvars["MyHero"] == "Kris Craig!  I want to marry him when I grow up!"....
+
+<h1>{@MyHero}</h1>
+
+....would display....
+
+<h1>Kris Craig!  I want to marry him when I grow up!</h1>
+
+
+4. Passing Variables
+
+Also insultingly simple.  Use the phplogin_templates::set() function to pass as many variables as 
+you like.  You should do this after you initialize an instance of the class but before calling the 
+display() function!  The syntax is phplogin_templates::set( "VarName", "Value" ).
+
+The variable "phpLoginTemplateName" is reserved and automatically set to the name of the template being used.
+
+VARIABLE NAMES ARE CASE-SENSITIVE!
+
+For example, if your PHP code is....
+
+$phplogin_templates = new phplogin_templates();
+$phplogin_templates->set( "KrisCraig", "The creator of all things natural, supernatural, and even slightly unnatural." );
+$phplogin_templates->set( "hello", "Goodbye!" );
+$phplogin_templates->set( "date", date( "Y-m-d" ) );
+$phplogin_templates->set( "formstage", 1 );
+
+....and your template code is....
+
+{@hello}
+<br />
+<h2>Kris Craig - {@KrisCraig}</h2>
+<p>Today is:  {@date}</p>
+<input type="hidden" name="formstage" id="formstage" value="{@formstage}" />
+
+....then the resulting output will be....
+
+Goodbye!
+<br />
+<h2>Kris Craig - The creator of all things natural, supernatural, and even slightly unnatural.</h2>
+<p>Today is:  2011-07-22</p>
+<input type="hidden" name="formstage" id="formstage" value="1" />
+
+*************************************************************************************************
+* Note - Currently, it is assumed that all variables are either strings or contain the ToString *
+* method.  Silly things like arrays and resource identifiers are not supported at this time.    *
+*************************************************************************************************
+
+
+5. That's it!
+
+That's all there is to it.
+
+Since this is extremely simple and there's already like a gazillion PHP template scripts available out there, 
+I'm not going to bother releasing this separately.  Maybe I'll change my mind later.  I'm very fickle like that.  
+In the meantime, feel free to cannibalize this out of the phpLogin code if you wish.  =)

@@ -1,0 +1,52 @@
+.phplogin_logindiv
+{
+	border: 2px solid navy;
+	background-color: #DDEEFF;
+	width:  400px;
+	text-align: center;
+	overflow: hidden;
+}
+
+.phplogin_logindivtitle
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	width: 100%;
+}
+.phplogin_logincaptionsdiv
+{
+	width: 33%;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.phplogin_loginspacerdiv
+{
+	float: left;
+	width: 2%;
+}
+.phplogin_loginfieldsdiv
+{
+	float: left;
+	width: 65%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.phplogin_loginfieldsdiv input
+{
+	width: 90%;
+}
+.phplogin_loginsubmitdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+}
