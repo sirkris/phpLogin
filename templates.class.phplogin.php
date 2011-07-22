@@ -46,12 +46,12 @@ class phplogin_templates
 	/* Parse the template file.  See template_syntax.phplogin.txt for specifications.  --Kris */
 	function parse( $filedata )
 	{
-		if ( !is_array( $this->args ) )
+		if ( !is_array( $this->customvars ) )
 		{
 			return FALSE;
 		}
 		
-		if ( empty( $this->args ) )
+		if ( empty( $this->customvars ) )
 		{
 			return $filedata;
 		}
