@@ -62,5 +62,8 @@ $phplogin_session_repopulate = 300;
  */
 $phplogin_admin_redirect = FALSE;
 
+/* The path (absolute or relative to PHP_SELF) to the HTML form templates directory.  Trailing slash is added automatically if omitted.  --Kris */
+$phplogin_templates_dir = "phplogin_templates";
+
 /* Do not modify or remove this!  --Kris */
 require( "config.init.phplogin.php" );

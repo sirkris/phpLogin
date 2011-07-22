@@ -14,3 +14,8 @@ require_once( "encryption.phplogin.class.php" );
 require_once( "register.phplogin.class.php" );
 require_once( "session.phplogin.class.php" );
 require_once( "user.phplogin.class.php" );
+
+if ( strcmp( substr( $phplogin_templates_dir, strlen( $phplogin_templates_dir ) - 1, 1 ), "/" ) )
+{
+	$phplogin_templates_dir .= "/";
+}
