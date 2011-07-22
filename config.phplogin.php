@@ -65,5 +65,9 @@ $phplogin_admin_redirect = FALSE;
 /* The path (absolute or relative to PHP_SELF) to the HTML form templates directory.  Trailing slash is added automatically if omitted.  --Kris */
 $phplogin_templates_dir = "phplogin_templates";
 
+/* The open/close tags for templates.  WARNING - Changing either of these will break any existing templates that contain variables!  --Kris */
+$phplogin_templates_opentag = "{@";
+$phplogin_templates_closetag = "}";
+
 /* Do not modify or remove this!  --Kris */
 require( "config.init.phplogin.php" );

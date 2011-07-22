@@ -13,6 +13,8 @@ class phplogin_templates
 		{
 			die( "<b>FATAL ERROR:  The templates directory '$phplogin_templates_dir' does not exist or is not readable!</b>" );
 		}
+		
+		$this->customvars = array();
 	}
 	
 	/* Display the specified template (loads $phplogin_templates_dir/$args[0].template.phplogin.html).  --Kris */
@@ -30,6 +32,8 @@ class phplogin_templates
 		}
 		
 		$filedata = $this->load( $templatefile ) or return array( "Success" => FALSE, "Reason" => "Error loading template $template for read!" );
+		
+		$this->customvars["phpLoginTemplateName"] = $template;
 		$filedata = $this->parse( $filedata ) or return array( "Success" => FALSE, "Reason" => "Error parsing template $template!" );
 		
 		print $filedata;
@@ -56,6 +60,30 @@ class phplogin_templates
 			return $filedata;
 		}
 		
+		foreach ( $this->customvars as $varname => $value )
+		{
+			$filedata = str_replace( $phplogin_templates_opentag . $varname . $phplogin_templates_closetag, $value, $filedata );
+		}
 		
+		return $filedata;
+	}
+	
+	/* Add a custom variable to be parsed from the template data.  Duplicate entries will be ignored.  --Kris */
+	function set( $varname, $value )
+	{
+		$varname = trim( $varname );
+		
+		if ( $varname == NULL )
+		{
+			return FALSE;
+		}
+		
+		return $this->customvars[$varname] = $value;
+	}
+	
+	/* Just in case you need to for whatever reason.  --Kris */
+	function clear()
+	{
+		$this->customvars = array();
 	}
 }

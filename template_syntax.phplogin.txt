@@ -52,6 +52,10 @@ Also insultingly simple.  Use the phplogin_templates::set() function to pass as 
 you like.  You should do this after you initialize an instance of the class but before calling the 
 display() function!  The syntax is phplogin_templates::set( "VarName", "Value" ).
 
+The variable "phpLoginTemplateName" is reserved and automatically set to the name of the template being used.
+
+VARIABLE NAMES ARE CASE-SENSITIVE!
+
 For example, if your PHP code is....
 
 $phplogin_templates = new phplogin_templates();
