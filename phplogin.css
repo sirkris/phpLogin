@@ -195,3 +195,76 @@
 	height: 27px;
 	font-size: 12pt;
 }
+
+.phplogin_changepassworddiv
+{
+	border: 2px solid navy;
+	background-color: #DDEEFF;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
+}
+.phplogin_changepassworddivtitle
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_changepasswordcaptionsdiv
+{
+	width: 49%;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.phplogin_changepasswordspacerdiv
+{
+	float: left;
+	width: 2%;
+}
+.phplogin_changepasswordfieldsdiv
+{
+	float: left;
+	width: 49%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.phplogin_changepasswordfieldsdiv input
+{
+	width: 90%;
+}
+.phplogin_changepasswordsubmitdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+}
+.phplogin_changepasswordcontainerdiv
+{
+	text-align: center;
+	float: left;
+	display: inline-block;
+	clear: left;
+	width: 40%;
+	position: relative;
+	left: 30%;
+	height: 100%;
+}
+.phplogin_changepasswordrowdiv
+{
+	height: 27px;
+	font-size: 12pt;
+}
