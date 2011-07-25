@@ -268,3 +268,76 @@
 	height: 27px;
 	font-size: 12pt;
 }
+
+.phplogin_resetpassworddiv
+{
+	border: 2px solid navy;
+	background-color: #DDEEFF;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
+}
+.phplogin_resetpassworddivtitle
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_resetpasswordcaptionsdiv
+{
+	width: 49%;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.phplogin_resetpasswordspacerdiv
+{
+	float: left;
+	width: 2%;
+}
+.phplogin_resetpasswordfieldsdiv
+{
+	float: left;
+	width: 49%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.phplogin_resetpasswordfieldsdiv input
+{
+	width: 90%;
+}
+.phplogin_resetpasswordsubmitdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+}
+.phplogin_resetpasswordcontainerdiv
+{
+	text-align: center;
+	float: left;
+	display: inline-block;
+	clear: left;
+	width: 40%;
+	position: relative;
+	left: 30%;
+	height: 100%;
+}
+.phplogin_resetpasswordrowdiv
+{
+	height: 27px;
+	font-size: 12pt;
+}
