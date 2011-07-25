@@ -1,0 +1,40 @@
+<!-- Begin {@phpLoginTemplateName} template for phpLogin. -->
+<form name="phpLogin_edituser" id="phpLogin_edituser" action="{@action}" method="POST">
+<div class="phplogin_edituserdiv">
+<div class="phplogin_edituserdivtitle">
+Edit Profile
+</div>
+{@errmsg}
+<div class="phplogin_editusercaptionsdiv">
+<div class="phplogin_edituserrowdiv">
+Username:
+</div>
+<br />
+<div class="phplogin_edituserrowdiv">
+Password:
+</div>
+<br />
+<div class="phplogin_edituserrowdiv">
+Email Address:
+</div>
+</div>
+<div class="phplogin_edituserspacerdiv">&nbsp;</div>
+<div class="phplogin_edituserfieldsdiv">
+<div class="phplogin_edituserrowdiv">
+{@username}
+</div>
+<br />
+<div class="phplogin_edituserrowdiv">
+<a href="phplogin_changepassword.php">Change Password</a>
+</div>
+<br />
+<div class="phplogin_edituserrowdiv">
+<input type="text" name="phplogin_email" id="phplogin_email" value="{@email}" maxlength="255" />
+</div>
+</div>
+<div class="phplogin_editusersubmitdiv">
+<input type="submit" name="phplogin_submit" id="phplogin_submit" value="{@submit}" />
+</div>
+</div>
+</form>
+<!-- End {@phpLoginTemplateName} template for phpLogin. -->
