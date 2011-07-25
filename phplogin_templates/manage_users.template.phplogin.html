@@ -1,0 +1,72 @@
+<!-- Begin {@phpLoginTemplateName} template for phpLogin. -->
+<form name="phpLogin_manageusers" id="phpLogin_manageusers" action="{@action}" method="POST">
+<div class="phplogin_manageusersdiv">
+<div class="phplogin_manageusersdivtitle">
+Manage Users
+</div>
+{@errmsg}
+<div class="phplogin_manageuserscaptionsdiv">
+<div class="phplogin_manageusersrowdiv">
+Select User:
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+Email Address:
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+Status:
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+User Since:
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+Logged-In?
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+Last Login:
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+Last Action:
+</div>
+</div>
+<div class="phplogin_manageusersspacerdiv">&nbsp;</div>
+<div class="phplogin_manageusersfieldsdiv">
+<div class="phplogin_manageusersrowdiv">
+{@userslist}
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+<input type="text" name="phplogin_email" id="phplogin_email" value="{@email}" maxlength="255" {@readonly}/>
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+{@status}
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+{@usersince}
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+{@loggedon}
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+{@loggedonsince}
+</div>
+<br />
+<div class="phplogin_manageusersrowdiv">
+{@lastaction}
+</div>
+</div>
+<div class="phplogin_manageuserssubmitdiv">
+<input type="submit" name="phplogin_submit" id="phplogin_submit" value="{@submit}" />
+</div>
+</div>
+</form>
+<!-- End {@phpLoginTemplateName} template for phpLogin. -->
