@@ -6,7 +6,6 @@
 	text-align: center;
 	overflow: hidden;
 }
-
 .phplogin_logindivtitle
 {
 	border: 1px solid black;
@@ -49,4 +48,535 @@
 	padding-bottom: 5px;
 	text-align: center;
 	width: 100%;
+}
+
+.phplogin_registerdiv
+{
+	border: 2px solid navy;
+	background-color: #DDEEFF;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
+}
+.phplogin_registerdivtitle
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_registercaptionsdiv
+{
+	width: 49%;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.phplogin_registerspacerdiv
+{
+	float: left;
+	width: 2%;
+}
+.phplogin_registerfieldsdiv
+{
+	float: left;
+	width: 49%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.phplogin_registerfieldsdiv input
+{
+	width: 90%;
+}
+.phplogin_registersubmitdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+}
+.phplogin_registercontainerdiv
+{
+	text-align: center;
+	float: left;
+	display: inline-block;
+	clear: left;
+	width: 40%;
+	position: relative;
+	left: 30%;
+	height: 100%;
+}
+.phplogin_registerrowdiv
+{
+	height: 27px;
+	font-size: 12pt;
+}
+
+.phplogin_edituserdiv
+{
+	border: 2px solid navy;
+	background-color: #DDEEFF;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
+}
+.phplogin_edituserdivtitle
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_editusercaptionsdiv
+{
+	width: 49%;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.phplogin_edituserspacerdiv
+{
+	float: left;
+	width: 2%;
+}
+.phplogin_edituserfieldsdiv
+{
+	float: left;
+	width: 49%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.phplogin_edituserfieldsdiv input
+{
+	width: 90%;
+}
+.phplogin_editusersubmitdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+}
+.phplogin_editusercontainerdiv
+{
+	text-align: center;
+	float: left;
+	display: inline-block;
+	clear: left;
+	width: 40%;
+	position: relative;
+	left: 30%;
+	height: 100%;
+}
+.phplogin_edituserrowdiv
+{
+	height: 27px;
+	font-size: 12pt;
+}
+
+.phplogin_changepassworddiv
+{
+	border: 2px solid navy;
+	background-color: #DDEEFF;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
+}
+.phplogin_changepassworddivtitle
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_changepasswordcaptionsdiv
+{
+	width: 49%;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.phplogin_changepasswordspacerdiv
+{
+	float: left;
+	width: 2%;
+}
+.phplogin_changepasswordfieldsdiv
+{
+	float: left;
+	width: 49%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.phplogin_changepasswordfieldsdiv input
+{
+	width: 90%;
+}
+.phplogin_changepasswordsubmitdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+}
+.phplogin_changepasswordcontainerdiv
+{
+	text-align: center;
+	float: left;
+	display: inline-block;
+	clear: left;
+	width: 40%;
+	position: relative;
+	left: 30%;
+	height: 100%;
+}
+.phplogin_changepasswordrowdiv
+{
+	height: 27px;
+	font-size: 12pt;
+}
+
+.phplogin_resetpassworddiv
+{
+	border: 2px solid navy;
+	background-color: #DDEEFF;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
+}
+.phplogin_resetpassworddivtitle
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_resetpasswordcaptionsdiv
+{
+	width: 49%;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.phplogin_resetpasswordspacerdiv
+{
+	float: left;
+	width: 2%;
+}
+.phplogin_resetpasswordfieldsdiv
+{
+	float: left;
+	width: 49%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.phplogin_resetpasswordfieldsdiv input
+{
+	width: 90%;
+}
+.phplogin_resetpasswordsubmitdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+}
+.phplogin_resetpasswordcontainerdiv
+{
+	text-align: center;
+	float: left;
+	display: inline-block;
+	clear: left;
+	width: 40%;
+	position: relative;
+	left: 30%;
+	height: 100%;
+}
+.phplogin_resetpasswordrowdiv
+{
+	height: 27px;
+	font-size: 12pt;
+}
+
+.phplogin_manageusersdiv
+{
+	border: 2px solid navy;
+	background-color: #DDEEFF;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
+}
+.phplogin_manageusersdivtitle
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_manageuserscaptionsdiv
+{
+	width: 49%;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.phplogin_manageusersspacerdiv
+{
+	float: left;
+	width: 2%;
+}
+.phplogin_manageusersfieldsdiv
+{
+	float: left;
+	width: 49%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.phplogin_manageusersfieldsdiv input
+{
+	width: 90%;
+}
+.phplogin_manageuserssubmitdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+}
+.phplogin_manageuserscontainerdiv
+{
+	text-align: center;
+	float: left;
+	display: inline-block;
+	clear: left;
+	width: 40%;
+	position: relative;
+	left: 30%;
+	height: 100%;
+}
+.phplogin_manageusersrowdiv
+{
+	height: 27px;
+	font-size: 12pt;
+}
+
+.phplogin_viewprofilediv
+{
+	border: 2px solid navy;
+	background-color: #DDEEFF;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
+}
+.phplogin_viewprofiledivtitle
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_viewprofilecaptionsdiv
+{
+	width: 49%;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.phplogin_viewprofilespacerdiv
+{
+	float: left;
+	width: 2%;
+}
+.phplogin_viewprofilefieldsdiv
+{
+	float: left;
+	width: 49%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.phplogin_viewprofilefieldsdiv input
+{
+	width: 90%;
+}
+.phplogin_viewprofilesubmitdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+}
+.phplogin_viewprofilecontainerdiv
+{
+	text-align: center;
+	float: left;
+	display: inline-block;
+	clear: left;
+	width: 40%;
+	position: relative;
+	left: 30%;
+	height: 100%;
+}
+.phplogin_viewprofilerowdiv
+{
+	height: 27px;
+	font-size: 12pt;
+}
+.phplogin_viewprofilediv a
+{
+	font-size: 12pt;
+	text-decoration: none;
+	color: green;
+}
+.phplogin_viewprofilediv a:hover
+{
+	color: blue;
+}
+
+.phplogin_contactdiv
+{
+	border: 2px solid navy;
+	background-color: #DDEEFF;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
+}
+.phplogin_contactdivtitle
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_contactcaptionsdiv
+{
+	width: 49%;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.phplogin_contactspacerdiv
+{
+	float: left;
+	width: 2%;
+}
+.phplogin_contactfieldsdiv
+{
+	float: left;
+	width: 49%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.phplogin_contactfieldsdiv input
+{
+	width: 90%;
+}
+.phplogin_contactsubmitdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+}
+.phplogin_contactcontainerdiv
+{
+	text-align: center;
+	float: left;
+	display: inline-block;
+	clear: left;
+	width: 40%;
+	position: relative;
+	left: 30%;
+	height: 100%;
+}
+.phplogin_contactrowdiv
+{
+	height: 27px;
+	font-size: 12pt;
+}
+.phplogin_contactrowtextareadiv
+{
+	height: 150px;
+	font-size: 12pt;
+}
+.phplogin_contacttextareacaptiondiv
+{
+	position: relative;
+	top: 30%;
 }

@@ -1,0 +1,50 @@
+<!-- Begin {@phpLoginTemplateName} template for phpLogin. -->
+<form name="phpLogin_register" id="phpLogin_register" action="{@action}" method="POST">
+<div class="phplogin_registerdiv">
+<div class="phplogin_registerdivtitle">
+User Registration
+</div>
+{@errmsg}
+<div class="phplogin_registercaptionsdiv">
+<div class="phplogin_registerrowdiv">
+Username:
+</div>
+<br />
+<div class="phplogin_registerrowdiv">
+Password:
+</div>
+<br />
+<div class="phplogin_registerrowdiv">
+Retype Password:
+</div>
+<br />
+<div class="phplogin_registerrowdiv">
+Email Address:
+</div>
+{@addedcaptions}
+</div>
+<div class="phplogin_registerspacerdiv">&nbsp;</div>
+<div class="phplogin_registerfieldsdiv">
+<div class="phplogin_registerrowdiv">
+<input type="text" name="phplogin_username" id="phplogin_username" maxlength="255" />
+</div>
+<br />
+<div class="phplogin_registerrowdiv">
+<input type="password" name="phplogin_password" id="phplogin_password" />
+</div>
+<br />
+<div class="phplogin_registerrowdiv">
+<input type="password" name="phplogin_passwordretype" id="phplogin_passwordretype" />
+</div>
+<br />
+<div class="phplogin_registerrowdiv">
+<input type="text" name="phplogin_email" id="phplogin_email" maxlength="255" />
+</div>
+{@addedinputs}
+</div>
+<div class="phplogin_registersubmitdiv">
+<input type="submit" name="phplogin_submit" id="phplogin_submit" value="{@submit}" />
+</div>
+</div>
+</form>
+<!-- End {@phpLoginTemplateName} template for phpLogin. -->
