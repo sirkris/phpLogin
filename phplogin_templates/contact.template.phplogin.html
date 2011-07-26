@@ -1,0 +1,42 @@
+<!-- Begin {@phpLoginTemplateName} template for phpLogin. -->
+<form name="phpLogin_contact" id="phpLogin_contact" action="{@action}" method="POST">
+<div class="phplogin_contactdiv">
+<div class="phplogin_contactdivtitle">
+Send Message
+</div>
+{@errmsg}
+<div class="phplogin_contactcaptionsdiv">
+<div class="phplogin_contactrowdiv">
+To:
+</div>
+<br />
+<div class="phplogin_contactrowdiv">
+Subject:
+</div>
+<br />
+<div class="phplogin_contactrowtextareadiv">
+<div class="phplogin_contacttextareacaptiondiv">
+Message:
+</div>
+</div>
+</div>
+<div class="phplogin_contactspacerdiv">&nbsp;</div>
+<div class="phplogin_contactfieldsdiv">
+<div class="phplogin_contactrowdiv">
+{@username}
+</div>
+<br />
+<div class="phplogin_contactrowdiv">
+<input type="text" name="phplogin_subject" id="phplogin_subject" maxlength="255" />
+</div>
+<br />
+<div class="phplogin_contactrowtextareadiv">
+<textarea rows="7" cols="32" name="phplogin_message" id="phplogin_message"></textarea>
+</div>
+</div>
+<div class="phplogin_contactsubmitdiv">
+<input type="submit" name="phplogin_submit" id="phplogin_submit" value="{@submit}" />
+</div>
+</div>
+</form>
+<!-- End {@phpLoginTemplateName} template for phpLogin. -->
