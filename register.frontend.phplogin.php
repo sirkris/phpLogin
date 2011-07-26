@@ -10,7 +10,7 @@ $phplogin_templates->clear();
 
 ?><div class="phplogin_registercontainerdiv"><?php
 
-$phplogin_templates->set( "action", "#" );
+$phplogin_templates->set( "action", "register.backend.phplogin.php" );
 $phplogin_templates->set( "submit", "Submit Registration" );
 $phplogin_templates->set( "errmsg", ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL ) );
 
