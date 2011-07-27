@@ -22,8 +22,8 @@ $phplogin_templates->clear();
 $phplogin_templates->set( "action", "edit_user.backend.phplogin.php" );
 $phplogin_templates->set( "submit", "Save Changes" );
 $phplogin_templates->set( "errmsg", ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL ) );
-$phplogin_templates->set( "username", $username );
-$phplogin_templates->set( "email", $email );
+$phplogin_templates->set( "username", $user->userdata["username"] );
+$phplogin_templates->set( "email", $user->userdata["email"] );
 
 $phplogin_templates->display( "edit_user" );
 

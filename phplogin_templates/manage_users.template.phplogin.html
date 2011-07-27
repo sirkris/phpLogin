@@ -1,5 +1,4 @@
 <!-- Begin {@phpLoginTemplateName} template for phpLogin. -->
-<form name="phpLogin_manageusers" id="phpLogin_manageusers" action="{@action}" method="POST">
 <div class="phplogin_manageusersdiv">
 <div class="phplogin_manageusersdivtitle">
 Manage Users
@@ -37,9 +36,12 @@ Last Action:
 <div class="phplogin_manageusersspacerdiv">&nbsp;</div>
 <div class="phplogin_manageusersfieldsdiv">
 <div class="phplogin_manageusersrowdiv">
+<form name="phplogin_pickuser" id="phplogin_pickuser" action="{@action2}" method="GET">
 {@userslist}
+</form>
 </div>
 <br />
+<form name="phpLogin_manageusers" id="phpLogin_manageusers" action="{@action}" method="POST">
 <div class="phplogin_manageusersrowdiv">
 <input type="text" name="phplogin_email" id="phplogin_email" value="{@email}" maxlength="255" {@readonly}/>
 </div>
@@ -49,7 +51,7 @@ Last Action:
 </div>
 <br />
 <div class="phplogin_manageusersrowdiv">
-{@usersince}
+{@registered}
 </div>
 <br />
 <div class="phplogin_manageusersrowdiv">
@@ -67,6 +69,6 @@ Last Action:
 <div class="phplogin_manageuserssubmitdiv">
 <input type="submit" name="phplogin_submit" id="phplogin_submit" value="{@submit}" />
 </div>
-</div>
 </form>
+</div>
 <!-- End {@phpLoginTemplateName} template for phpLogin. -->
