@@ -7,8 +7,7 @@ $user = new phplogin_user();
 /* If not authorized, throw an error.  --Kris */
 if ( !isset( $user->userdata ) || !isset( $user->userdata["status"] ) || !isset( $user->userid ) || $user->userdata["status"] < 2 )
 {
-	//die( "You are not authorized to view this page." );
-	$user->userdata["status"] = 4;
+	die( "You are not authorized to view this page." );
 }
 
 $phplogin_templates = new phplogin_templates();
