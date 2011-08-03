@@ -57,7 +57,7 @@ class phplogin_user
 		
 		$sql = new phplogin_sql();
 		
-		if ( strcmp( $wherecond, "phpsessid" ) == 0 )
+		if ( strcmp( $cond, "phpsessid" ) == 0 )
 		{
 			$query = "select $sel from phplogin_users where phpsessid = ?";
 			$params = array( $sql->addescape( $session_id ) );
@@ -88,10 +88,13 @@ class phplogin_user
 		
 		$_SESSION["phplogin_userdata"] = $this->load_data();
 		
-		$_SESSION["phplogin_userdata"] = $_SESSION["phplogin_userdata"][0];
+		if ( !empty( $_SESSION["phplogin_userdata"] ) )
+		{
+			$_SESSION["phplogin_userdata"] = $_SESSION["phplogin_userdata"][0];
+		}
 		
 		/* If user has been logged-out, banned, etc; clear the session data.  --Kris */
-		if ( $_SESSION["phplogin_userdata"]["status"] <= 0 || $_SESSION["phplogin_userdata"]["loggedon"] != 1 )
+		if ( empty( $_SESSION["phplogin_userdata"] ) || $_SESSION["phplogin_userdata"]["status"] <= 0 || $_SESSION["phplogin_userdata"]["loggedon"] != 1 )
 		{
 			$this->clear_session();
 			return;

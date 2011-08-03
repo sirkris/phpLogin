@@ -20,3 +20,13 @@ if ( strcmp( substr( $phplogin_templates_dir, strlen( $phplogin_templates_dir ) 
 {
 	$phplogin_templates_dir .= "/";
 }
+
+/* The user status levels.  See status_codes.phplogin.txt for details.  --Kris */
+$phplogin_statuslevels = array();
+$phplogin_statuslevels[-2] = "RESERVED";
+$phplogin_statuslevels[-1] = "BANNED";
+$phplogin_statuslevels[0] = "PENDING";
+$phplogin_statuslevels[1] = "ACTIVE";
+$phplogin_statuslevels[2] = "MODERATOR";
+$phplogin_statuslevels[3] = "ADMIN";
+$phplogin_statuslevels[4] = "SUPERUSER";
