@@ -46,10 +46,10 @@ class phplogin_controller
 			default:
 				return FALSE;
 				break;
-			case 400:
+			case "400";
 				$this->tempaltevars["getvars"] = $_GET;
 				break;
-			case 404:
+			case "404":
 				$this->templatevars["templatefile"] = $template->filename( $this->template );
 				break;
 		}
