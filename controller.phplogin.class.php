@@ -8,20 +8,24 @@ class phplogin_controller
 		
 		$args = func_get_args();
 		
-		if ( empty( $args ) || !isset( $args[0] ) )
+		if ( empty( $args ) || !isset( $args[0] ) || !isset( $args[0]["phplogin_template"] ) )
 		{
 			$this->template = "400";  //Bad request.  --Kris
 			return;
 		}
 		
+		$arg = $args[0]["phplogin_template"];
+		
 		$template = new phplogin_templates();
-		if ( $template->exists( $args[0] ) )
+		if ( $template->exists( $arg ) )
 		{
-			$this->tempalte = $args[0];
+			$this->tempalte = $arg;
 		}
 		else
 		{
 			$this->template = "404";  //File not found.  --Kris
 		}
 	}
+	
+	
 }
