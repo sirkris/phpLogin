@@ -2,6 +2,7 @@
 
 class phplogin_controller
 {
+	/* Validate the argument and set the template to be used.  --Kris */
 	function __construct()
 	{
 		require( "config.phplogin.php" );
@@ -27,5 +28,32 @@ class phplogin_controller
 		}
 	}
 	
-	
+	/* Determine the vars to be set for each template.  --Kris */
+	function setvars()
+	{
+		require( "config.phplogin.php" );
+		
+		if ( !isset( $this->template ) )
+		{
+			return FALSE;
+		}
+		
+		$template = new phplogin_templates();
+		
+		$this->templatevars = array();
+		switch ( $this->template )
+		{
+			default:
+				return FALSE;
+				break;
+			case 400:
+				$this->tempaltevars["getvars"] = $_GET;
+				break;
+			case 404:
+				$this->templatevars["templatefile"] = $template->filename( $this->template );
+				break;
+		}
+		
+		return TRUE;
+	}
 }
