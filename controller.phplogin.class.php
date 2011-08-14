@@ -57,6 +57,25 @@ class phplogin_controller
 				$this->templatevars["submit"] = "Change Password";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
 				break;
+			// TODO - "contact" (requires model)
+			// TODO - "edit_user" (requires model)
+			case "login":
+				$this->templatevars["action"] = "#";
+				$this->templatevars["submit"] = "Login";
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				break;
+			// TODO - "manage_users" (requires model)
+			case "register":
+				$this->templatevars["action"] = "#";
+				$this->templatevars["submit"] = "Submit Registration";
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				break;
+			case "reset_password":
+				$this->templatevars["action"] = "#";
+				$this->templatevars["submit"] = "Send Reset Link";
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				break;
+			// TODO - "view_profile" (requires model)
 		}
 		
 		return TRUE;
@@ -85,3 +104,4 @@ class phplogin_controller
 		$phplogin_templates->clear();
 	}
 }
+ 
