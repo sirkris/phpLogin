@@ -29,7 +29,7 @@ class phplogin_controller
 	}
 	
 	/* Determine the vars to be set for each template.  --Kris */
-	function setvars()
+	function set_vars()
 	{
 		require( "config.phplogin.php" );
 		
@@ -52,8 +52,36 @@ class phplogin_controller
 			case "404":
 				$this->templatevars["templatefile"] = $template->filename( $this->template );
 				break;
+			case "change_password":
+				$this->templatevars["action"] = "#";
+				$this->templatevars["submit"] = "Change Password";
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				break;
 		}
 		
 		return TRUE;
+	}
+	
+	/* Send the header HTML for stand-alone pages.  --Kris */
+	function send_header()
+	{
+		require( "config.phplogin.php" );
+		
+		$phplogin_templates = new phplogin_templates();
+		
+		$phplogin_templates->set( "title", ucwords( str_replace( "_", " ", $this->template ) ) );
+		$phplogin_templates->display( "header" );
+		$phplogin_templates->clear();
+	}
+	
+	/* Send the footer HTML for stand-alone pages.  --Kris */
+	function send_footer()
+	{
+		require( "config.phplogin.php" );
+		
+		$phplogin_templates = new phplogin_templates();
+		
+		$phplogin_templates->display( "footer" );
+		$phplogin_templates->clear();
 	}
 }
