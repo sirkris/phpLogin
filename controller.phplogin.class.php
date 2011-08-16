@@ -103,5 +103,33 @@ class phplogin_controller
 		$phplogin_templates->display( "footer" );
 		$phplogin_templates->clear();
 	}
+	
+	/* The primary controller function that passes to the view.  --Kris */
+	function send_view( $skipheader = FALSE, $skipfooter = FALSE )
+	{
+		require( "config.phplogin.php" );
+		
+		if ( $skipheader == FALSE )
+		{
+			$this->send_header();
+		}
+		
+		$phplogin_templates = new phplogin_templates();
+		
+		if ( isset( $this->templatevars ) && is_array( $this->templatevars ) )
+		{
+			foreach ( $this->templatevars as $var => $val )
+			{
+				$phplogin_templates->set( $var, $val );
+			}
+		}
+		
+		$phplogin_templates->display( $this->template );
+		$phplogin_templates->clear();
+		
+		if ( $skipfooter == FALSE )
+		{
+			$this->send_footer();
+		}
+	}
 }
- 
