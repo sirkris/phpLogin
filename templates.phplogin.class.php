@@ -17,12 +17,30 @@ class phplogin_templates
 		$this->customvars = array();
 	}
 	
+	/* Formulate the template filename.  --Kris */
+	function filename( $template )
+	{
+		require( "config.phplogin.php" );
+		
+		return $phplogin_templates_dir . $template . ".template.phplogin.html";
+	}
+	
+	/* Make sure the template exists.  --Kris */
+	function exists( $template )
+	{
+		require( "config.phplogin.php" );
+		
+		$templatefile = $this->filename( $template );
+		
+		return ( file_exists( $templatefile ) && is_file( $templatefile ) && is_readable( $templatefile ) ? TRUE : FALSE );
+	}
+	
 	/* Display the specified template (loads $phplogin_templates_dir/$args[0].template.phplogin.html).  --Kris */
 	function display( $template )
 	{
 		require( "config.phplogin.php" );
 		
-		$templatefile = $phplogin_templates_dir . $template . ".template.phplogin.html";
+		$templatefile = $this->filename( $template );
 		
 		if ( !file_exists( $templatefile ) 
 			|| !is_file( $templatefile ) 
