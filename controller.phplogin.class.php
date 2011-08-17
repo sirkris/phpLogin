@@ -57,6 +57,9 @@ class phplogin_controller
 			case "400";
 				$this->tempaltevars["getvars"] = $_GET;
 				break;
+			case "403";
+				$this->tempaltevars["getvars"] = $_GET;
+				break;
 			case "404":
 				$this->templatevars["templatefile"] = $template->filename( $this->template );
 				break;
@@ -81,7 +84,23 @@ class phplogin_controller
 					return FALSE;
 				}
 				break;
-			// TODO - "edit_user" (requires model)
+			case "edit_user":
+				$this->templatevars["action"] = "#";
+				$this->templatevars["submit"] = "Save Changes";
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				$phplogin_user = phplogin_model::get_userdata();
+				if ( isset( $phplogin_user->error ) && $phplogin_user->error == TRUE )
+				{
+					$this->template = "403";
+					$this->set_vars();
+					return FALSE;
+				}
+				else
+				{
+					$this->templatevars["username"] = $phplogin_user->userdata["username"];
+					$this->templatevars["email"] = $phplogin_user->userdata["email"];
+				}
+				break;
 			case "login":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Login";

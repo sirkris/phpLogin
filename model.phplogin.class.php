@@ -26,4 +26,19 @@ class phplogin_model
 		
 		return $userdata;
 	}
+	
+	/* Return initialized user data.  --Kris */
+	public static function get_userdata()
+	{
+		require( "config.phplogin.php" );
+		
+		$user = new phplogin_user();
+		
+		if ( !isset( $user->userdata ) || !isset( $user->userdata["status"] ) || !isset( $user->userid ) || $user->userdata["status"] < 1 )
+		{
+			$user->error = TRUE;
+		}
+		
+		return $user;
+	}
 }
