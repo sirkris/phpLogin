@@ -106,5 +106,26 @@ class phplogin_model
 		return $userslist;
 	}
 	
-	// TODO - Set vars from selected userdata (called only if there is a selected user).  --Kris
+	/* Determine if user is logged-in.  --Kris */
+	public static function is_loggedon()
+	{
+		require( "config.phplogin.php" );
+		
+		$user = self::get_userdata();
+		
+		return ( isset( $user->userdata ) && isset( $user->userdata["status"] ) && isset( $user->userid ) && $user->userdata["status"] >= 1 ? TRUE : FALSE );
+	}
+	
+	/* Determine if user outranks the victim (user must be moderator or above).  --Kris */
+	public static function is_superior( $selected_userid )
+	{
+		require( "config.phplogin.php" );
+		
+		$user = self::get_userdata();
+		
+		$victimdata = array();
+		$victimdata = self::get_userdata_by_userid( $selected_userid );
+		
+		return ( $user->userdata["status"] > $victimdata[0]["status"] && $user->userdata["status"] >= 2 ? TRUE : FALSE );
+	}
 }
