@@ -38,7 +38,10 @@ Last Action:
 <div class="phplogin_manageusersfieldsdiv">
 <div class="phplogin_manageusersrowdiv">
 <form name="phplogin_pickuser" id="phplogin_pickuser" action="{@action2}" method="GET">
+<select name="phplogin_userid" id="phplogin_userid" onChange="document.phplogin_pickuser.submit();">
+<option value="">-- Select a User --</option>
 {@userslist}
+</select>
 </form>
 </div>
 <br />

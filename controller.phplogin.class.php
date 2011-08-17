@@ -15,6 +15,14 @@ class phplogin_controller
 			return;
 		}
 		
+		foreach ( $args as $argarr )
+		{
+			foreach ( $argarr as $key => $value )
+			{
+				$this->$key = $value;
+			}
+		}
+		
 		$arg = $args[0]["phplogin_template"];
 		
 		$template = new phplogin_templates();
@@ -49,6 +57,9 @@ class phplogin_controller
 			case "400";
 				$this->tempaltevars["getvars"] = $_GET;
 				break;
+			case "403";
+				$this->tempaltevars["getvars"] = $_GET;
+				break;
 			case "404":
 				$this->templatevars["templatefile"] = $template->filename( $this->template );
 				break;
@@ -57,14 +68,63 @@ class phplogin_controller
 				$this->templatevars["submit"] = "Change Password";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
 				break;
-			// TODO - "contact" (requires model)
-			// TODO - "edit_user" (requires model)
+			case "contact":
+				$this->templatevars["action"] = "#";
+				$this->templatevars["submit"] = "Send Message";
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				$userdata = phplogin_model::get_contactdata( $this->phplogin_userid );
+				if ( $userdata["Success"] == TRUE )
+				{
+					$this->templatevars["username"] = $userdata[0]["username"];
+				}
+				else
+				{
+					$this->template = "400";
+					$this->set_vars();
+					return FALSE;
+				}
+				break;
+			case "edit_user":
+				$this->templatevars["action"] = "#";
+				$this->templatevars["submit"] = "Save Changes";
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				$phplogin_user = phplogin_model::get_userdata();
+				if ( isset( $phplogin_user->error ) && $phplogin_user->error == TRUE )
+				{
+					$this->template = "403";
+					$this->set_vars();
+					return FALSE;
+				}
+				else
+				{
+					$this->templatevars["username"] = $phplogin_user->userdata["username"];
+					$this->templatevars["email"] = $phplogin_user->userdata["email"];
+				}
+				break;
 			case "login":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Login";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
 				break;
-			// TODO - "manage_users" (requires model)
+			case "manage_users":
+				$this->templatevars["action"] = "#";
+				$this->templatevars["action2"] = "#";
+				$this->templatevars["submit"] = "Save Changes";
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				if ( isset( $this->phplogin_userid ) )
+				{
+					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userslist( $this->phplogin_userid );
+					$victimdata = phplogin_model::get_userdata_by_userid( $this->phplogin_userid );
+					foreach ( $victimdata[0] as $key => $value )
+					{
+						$this->templatevars[$key] = $value;
+					}
+				}
+				else
+				{
+					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userslist();
+				}
+				break;
 			case "register":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Submit Registration";
@@ -75,7 +135,48 @@ class phplogin_controller
 				$this->templatevars["submit"] = "Send Reset Link";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
 				break;
-			// TODO - "view_profile" (requires model)
+			case "view_profile":
+				if ( !isset( $this->phplogin_userid ) || !is_numeric( $this->phplogin_userid ) )
+				{
+					$this->template = "400";
+					$this->set_vars();
+					return FALSE;
+				}
+				$victimdata = phplogin_model::get_userdata_by_userid( $this->phplogin_userid );
+				if ( !is_array( $victimdata ) || empty( $victimdata ) )
+				{
+					$this->template = "400";
+					$this->set_vars();
+					return FALSE;
+				}
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				foreach ( $victimdata[0] as $key => $value )
+				{
+					$this->templatevars[$key] = $value;
+				}
+				if ( phplogin_model::is_loggedon() )
+				{
+					// TODO - Replace URL with AJAX JS.  --Kris
+					$this->templatevars["contact"] = "[ <a href=\"contact.frontend.phplogin.php?phplogin_userid=" . $victimdata[0]["userid"] . "\">Send Message</a> ]";
+				}
+				else
+				{
+					$this->templatevars["contact"] = NULL;
+				}
+				if ( phplogin_model::is_superior( $victimdata[0]["userid"] ) )
+				{
+					// TODO - Replace URL with AJAX JS.  --Kris
+					$this->templatevars["editlink"] = "[ <a href=\"manage_users.frontend.phplogin.php?phplogin_userid=" . $victimdata[0]["userid"] . "\">Edit User</a> ]";
+				}
+				else
+				{
+					$this->templatevars["editlink"] = NULL;
+				}
+				$this->templatevars["status"] = $phplogin_statuslevels[$victimdata[0]["status"]];
+				$this->templatevars["usersince"] = ( $victimdata[0]["registered"] > 0 ? date( "F jS, Y", $victimdata[0]["registered"] ) : "N/A" );
+				$this->templatevars["loggedonsince"] = ( $victimdata[0]["loggedonsince"] > 0 ? date( "F jS, Y @ h:i:s A (T)", $victimdata[0]["loggedonsince"] ) : "N/A" );
+				$this->templatevars["loggedon"] = ( $victimdata[0]["loggedon"] == 1 ? "Yes" : "No" );
+				break;
 		}
 		
 		return TRUE;

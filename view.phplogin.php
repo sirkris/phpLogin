@@ -2,6 +2,13 @@
 
 require( "config.phplogin.php" );
 
-$controller = new phplogin_controller( $_GET );
+if ( !isset( $_POST ) || empty( $_POST ) )
+{
+	$controller = new phplogin_controller( $_GET );
+}
+else
+{
+	$controller = new phplogin_controller( $_POST );
+}
 
 $controller->send_view();

@@ -62,6 +62,10 @@ class phplogin_user
 			$query = "select $sel from phplogin_users where phpsessid = ?";
 			$params = array( $sql->addescape( $session_id ) );
 		}
+		else if ( strcmp( $cond, "*" ) == 0 )
+		{
+			$query = "select $sel from users";
+			$params = array();
 		else
 		{
 			$query = "select $sel from phplogin_users where $cond";
