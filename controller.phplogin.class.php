@@ -15,6 +15,14 @@ class phplogin_controller
 			return;
 		}
 		
+		foreach ( $args as $argarr )
+		{
+			foreach ( $argarr as $key => $value )
+			{
+				$this->$key = $value;
+			}
+		}
+		
 		$arg = $args[0]["phplogin_template"];
 		
 		$template = new phplogin_templates();
@@ -57,7 +65,13 @@ class phplogin_controller
 				$this->templatevars["submit"] = "Change Password";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
 				break;
-			// TODO - "contact" (requires model)
+			case "contact":
+				$this->templatevars["action"] = "#";
+				$this->templatevars["submit"] = "Send Message";
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				$userdata = phplogin_model::get_contactdata( $this->phplogin_userid );
+				$this->templatevars["username"] = $userdata[0]["username"];
+				break;
 			// TODO - "edit_user" (requires model)
 			case "login":
 				$this->templatevars["action"] = "#";
