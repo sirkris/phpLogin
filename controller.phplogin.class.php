@@ -106,7 +106,25 @@ class phplogin_controller
 				$this->templatevars["submit"] = "Login";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
 				break;
-			// TODO - "manage_users" (requires model)
+			case "manage_users":
+				$this->templatevars["action"] = "#";
+				$this->templatevars["action2"] = "#";
+				$this->templatevars["submit"] = "Save Changes";
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				if ( isset( $this->phplogin_userid ) )
+				{
+					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userslist( $this->phplogin_userid );
+					$victimdata = phplogin_model::get_userdata_by_userid( $this->phplogin_userid );
+					foreach ( $victimdata[0] as $key => $value )
+					{
+						$this->templatevars[$key] = $value;
+					}
+				}
+				else
+				{
+					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userslist();
+				}
+				break;
 			case "register":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Submit Registration";
