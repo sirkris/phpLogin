@@ -70,7 +70,16 @@ class phplogin_controller
 				$this->templatevars["submit"] = "Send Message";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
 				$userdata = phplogin_model::get_contactdata( $this->phplogin_userid );
-				$this->templatevars["username"] = $userdata[0]["username"];
+				if ( $userdata["Success"] == TRUE )
+				{
+					$this->templatevars["username"] = $userdata[0]["username"];
+				}
+				else
+				{
+					$this->template = "400";
+					$this->set_vars();
+					return FALSE;
+				}
 				break;
 			// TODO - "edit_user" (requires model)
 			case "login":
