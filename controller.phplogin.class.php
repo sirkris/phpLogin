@@ -12,28 +12,33 @@ class phplogin_controller
 		if ( empty( $args ) || !isset( $args[0] ) || !isset( $args[0]["phplogin_template"] ) )
 		{
 			$this->template = "400";  //Bad request.  --Kris
-			return;
-		}
-		
-		foreach ( $args as $argarr )
-		{
-			foreach ( $argarr as $key => $value )
-			{
-				$this->$key = $value;
-			}
-		}
-		
-		$arg = $args[0]["phplogin_template"];
-		
-		$template = new phplogin_templates();
-		if ( $template->exists( $arg ) )
-		{
-			$this->tempalte = $arg;
+			
+			$template = new phplogin_templates();
 		}
 		else
 		{
-			$this->template = "404";  //File not found.  --Kris
+			foreach ( $args as $argarr )
+			{
+				foreach ( $argarr as $key => $value )
+				{
+					$this->$key = $value;
+				}
+			}
+			
+			$arg = $args[0]["phplogin_template"];
+			
+			$template = new phplogin_templates();
+			if ( $template->exists( $arg ) )
+			{
+				$this->tempalte = $arg;
+			}
+			else
+			{
+				$this->template = "404";  //File not found.  --Kris
+			}
 		}
+		
+		$this->set_vars();
 	}
 	
 	/* Determine the vars to be set for each template.  --Kris */
@@ -56,6 +61,7 @@ class phplogin_controller
 				break;
 			case "400";
 				$this->tempaltevars["getvars"] = $_GET;
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : "An error occurred generating the template." );
 				break;
 			case "403";
 				$this->tempaltevars["getvars"] = $_GET;

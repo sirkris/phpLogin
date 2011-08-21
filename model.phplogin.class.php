@@ -88,7 +88,7 @@ class phplogin_model
 		$victimdata = array();
 		$victimdata = self::get_inferior_users();
 		
-		$userslist = NULL
+		$userslist = NULL;
 		foreach ( $victimdata as $vkey => $victim )
 		{
 			if ( $selected_userid != NULL && $selected_userid == $victim["userid"] )
