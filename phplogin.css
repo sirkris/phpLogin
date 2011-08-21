@@ -580,3 +580,94 @@
 	position: relative;
 	top: 30%;
 }
+
+.phplogin_messagediv
+{
+	border: 2px solid navy;
+	background-color: #DDEEFF;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
+}
+.phplogin_messagedivtitle
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_messagecaptionsdiv
+{
+	width: 49%;
+	text-align: right;
+	font-weight: bold;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.phplogin_messagespacerdiv
+{
+	float: left;
+	width: 2%;
+}
+.phplogin_messagefieldsdiv
+{
+	float: left;
+	width: 49%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.phplogin_messagefieldsdiv input
+{
+	width: 90%;
+}
+.phplogin_messagesubmitdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+}
+.phplogin_messagecontainerdiv
+{
+	text-align: center;
+	float: left;
+	display: inline-block;
+	clear: left;
+	width: 40%;
+	position: relative;
+	left: 30%;
+	height: 100%;
+}
+.phplogin_messagerowdiv
+{
+	height: 27px;
+	font-size: 12pt;
+}
+.phplogin_messagediv a
+{
+	font-size: 12pt;
+	text-decoration: none;
+	color: green;
+}
+.phplogin_messagediv a:hover
+{
+	color: blue;
+}
+.phplogin_messagetextdiv
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	width: 100%;
+	font-size: 12pt;
+}

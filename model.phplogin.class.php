@@ -88,7 +88,7 @@ class phplogin_model
 		$victimdata = array();
 		$victimdata = self::get_inferior_users();
 		
-		$userslist = NULL
+		$userslist = NULL;
 		foreach ( $victimdata as $vkey => $victim )
 		{
 			if ( $selected_userid != NULL && $selected_userid == $victim["userid"] )
@@ -127,5 +127,15 @@ class phplogin_model
 		$victimdata = self::get_userdata_by_userid( $selected_userid );
 		
 		return ( $user->userdata["status"] > $victimdata[0]["status"] && $user->userdata["status"] >= 2 ? TRUE : FALSE );
+	}
+	
+	/* Convenient function to return the user's status level.  --Kris */
+	public static function get_status()
+	{
+		require( "config.phplogin.php" );
+		
+		$user = self::get_userdata();
+		
+		return $user->userdata["status"];
 	}
 }

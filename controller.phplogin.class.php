@@ -12,28 +12,33 @@ class phplogin_controller
 		if ( empty( $args ) || !isset( $args[0] ) || !isset( $args[0]["phplogin_template"] ) )
 		{
 			$this->template = "400";  //Bad request.  --Kris
-			return;
-		}
-		
-		foreach ( $args as $argarr )
-		{
-			foreach ( $argarr as $key => $value )
-			{
-				$this->$key = $value;
-			}
-		}
-		
-		$arg = $args[0]["phplogin_template"];
-		
-		$template = new phplogin_templates();
-		if ( $template->exists( $arg ) )
-		{
-			$this->tempalte = $arg;
+			
+			$template = new phplogin_templates();
 		}
 		else
 		{
-			$this->template = "404";  //File not found.  --Kris
+			foreach ( $args as $argarr )
+			{
+				foreach ( $argarr as $key => $value )
+				{
+					$this->$key = $value;
+				}
+			}
+			
+			$arg = $args[0]["phplogin_template"];
+			
+			$template = new phplogin_templates();
+			if ( $template->exists( $arg ) )
+			{
+				$this->template = $arg;
+			}
+			else
+			{
+				$this->template = "404";  //File not found.  --Kris
+			}
 		}
+		
+		$this->set_vars();
 	}
 	
 	/* Determine the vars to be set for each template.  --Kris */
@@ -56,12 +61,15 @@ class phplogin_controller
 				break;
 			case "400";
 				$this->tempaltevars["getvars"] = $_GET;
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : "An error occurred generating the template." );
 				break;
 			case "403";
 				$this->tempaltevars["getvars"] = $_GET;
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : "Access denied." );
 				break;
 			case "404":
 				$this->templatevars["templatefile"] = $template->filename( $this->template );
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : "The requested resource could not be found." );
 				break;
 			case "change_password":
 				$this->templatevars["action"] = "#";
@@ -88,8 +96,7 @@ class phplogin_controller
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Save Changes";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
-				$phplogin_user = phplogin_model::get_userdata();
-				if ( isset( $phplogin_user->error ) && $phplogin_user->error == TRUE )
+				if ( phplogin_model::is_loggedon() == FALSE )
 				{
 					$this->template = "403";
 					$this->set_vars();
@@ -111,6 +118,13 @@ class phplogin_controller
 				$this->templatevars["action2"] = "#";
 				$this->templatevars["submit"] = "Save Changes";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				if ( phplogin_model::is_loggedon() == FALSE || phplogin_model::get_status() < 2 
+					|| ( isset( $this->phplogin_userid ) && is_superior( $this->phplogin_userid ) == FALSE ) )
+				{
+					$this->template = "403";
+					$this->set_vars();
+					return FALSE;
+				}
 				if ( isset( $this->phplogin_userid ) )
 				{
 					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userslist( $this->phplogin_userid );
@@ -122,7 +136,7 @@ class phplogin_controller
 				}
 				else
 				{
-					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userslist();
+					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userlist();
 				}
 				break;
 			case "register":

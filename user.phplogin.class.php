@@ -66,6 +66,7 @@ class phplogin_user
 		{
 			$query = "select $sel from users";
 			$params = array();
+		}
 		else
 		{
 			$query = "select $sel from phplogin_users where $cond";
