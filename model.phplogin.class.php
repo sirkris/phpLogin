@@ -126,7 +126,7 @@ class phplogin_model
 		$victimdata = array();
 		$victimdata = self::get_userdata_by_userid( $selected_userid );
 		
-		return ( $user->userdata["status"] > $victimdata[0]["status"] && $user->userdata["status"] >= 2 ? TRUE : FALSE );
+		return ( isset( $user->userdata ) && $user->userdata["status"] > $victimdata[0]["status"] && $user->userdata["status"] >= 2 ? TRUE : FALSE );
 	}
 	
 	/* Convenient function to return the user's status level.  --Kris */
