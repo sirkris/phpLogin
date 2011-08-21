@@ -30,7 +30,7 @@ class phplogin_controller
 			$template = new phplogin_templates();
 			if ( $template->exists( $arg ) )
 			{
-				$this->tempalte = $arg;
+				$this->template = $arg;
 			}
 			else
 			{
@@ -65,6 +65,7 @@ class phplogin_controller
 				break;
 			case "403";
 				$this->tempaltevars["getvars"] = $_GET;
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : "Access denied." );
 				break;
 			case "404":
 				$this->templatevars["templatefile"] = $template->filename( $this->template );
@@ -95,8 +96,7 @@ class phplogin_controller
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Save Changes";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
-				$phplogin_user = phplogin_model::get_userdata();
-				if ( isset( $phplogin_user->error ) && $phplogin_user->error == TRUE )
+				if ( phplogin_model::is_loggedon() == FALSE )
 				{
 					$this->template = "403";
 					$this->set_vars();
@@ -118,6 +118,13 @@ class phplogin_controller
 				$this->templatevars["action2"] = "#";
 				$this->templatevars["submit"] = "Save Changes";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				if ( phplogin_model::is_loggedon() == FALSE || phplogin_model::get_status() < 2 
+					|| ( isset( $this->phplogin_userid ) && is_superior( $this->phplogin_userid ) == FALSE ) )
+				{
+					$this->template = "403";
+					$this->set_vars();
+					return FALSE;
+				}
 				if ( isset( $this->phplogin_userid ) )
 				{
 					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userslist( $this->phplogin_userid );
@@ -129,7 +136,7 @@ class phplogin_controller
 				}
 				else
 				{
-					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userslist();
+					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userlist();
 				}
 				break;
 			case "register":

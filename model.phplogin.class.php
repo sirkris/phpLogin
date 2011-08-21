@@ -128,4 +128,14 @@ class phplogin_model
 		
 		return ( $user->userdata["status"] > $victimdata[0]["status"] && $user->userdata["status"] >= 2 ? TRUE : FALSE );
 	}
+	
+	/* Convenient function to return the user's status level.  --Kris */
+	public static function get_status()
+	{
+		require( "config.phplogin.php" );
+		
+		$user = self::get_userdata();
+		
+		return $user->userdata["status"];
+	}
 }
