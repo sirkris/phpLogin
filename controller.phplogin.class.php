@@ -68,6 +68,7 @@ class phplogin_controller
 				break;
 			case "404":
 				$this->templatevars["templatefile"] = $template->filename( $this->template );
+				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : "The requested resource could not be found." );
 				break;
 			case "change_password":
 				$this->templatevars["action"] = "#";
