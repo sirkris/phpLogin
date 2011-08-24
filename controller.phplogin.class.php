@@ -220,7 +220,7 @@ class phplogin_controller
 	}
 	
 	/* The primary controller function that passes to the view.  --Kris */
-	function send_view( $skipheader = FALSE, $skipfooter = FALSE )
+	function send_view( $skipheader = TRUE, $skipfooter = TRUE )
 	{
 		require( "config.phplogin.php" );
 		

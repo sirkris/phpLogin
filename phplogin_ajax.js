@@ -26,6 +26,12 @@ function phplogin_getHTTPObject()
 
 function phplogin_updateView( url, method, elementid )
 {
+	if ( url == "NULL" )
+	{
+		document.getElementById( elementid ).innerHTML = "";
+		return;
+	}
+	
 	var http = phplogin_getHTTPObject();
 	
 	http.open( method, url, true );

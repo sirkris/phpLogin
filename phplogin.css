@@ -671,3 +671,58 @@
 	width: 100%;
 	font-size: 12pt;
 }
+
+.phplogin_containerdiv
+{
+	text-align: center;
+	position: absolute;
+	left: 30%;
+	width: 40%;
+	top: 30%;
+	z-index: 9999;
+	visibility: visible;
+}
+.phplogin_viewerdiv
+{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 100%;
+	width: 100%;
+	z-index: -9999;
+	visibility: hidden;
+}
+.phplogin_titlediv
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_xdiv
+{
+	color: yellow;
+	background-color: navy;
+	text-align: right;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 10%;
+	position: absolute;
+	left: 90%;
+	top: 0px;
+	z-index: 10000;
+}
+.phplogin_xdiv a
+{
+	text-decoration: none;
+	color: yellow;
+}
+.phplogin_xdiv a:hover
+{
+	color: white;
+}
