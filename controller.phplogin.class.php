@@ -75,21 +75,36 @@ class phplogin_controller
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Change Password";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				if ( phplogin_model::is_loggedon() == FALSE )
+				{
+					$this->template = "403";
+					$this->set_vars();
+					return FALSE;
+				}
 				break;
 			case "contact":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Send Message";
 				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
-				$userdata = phplogin_model::get_contactdata( $this->phplogin_userid );
-				if ( $userdata["Success"] == TRUE )
+				if ( phplogin_model::is_loggedon() == FALSE )
 				{
-					$this->templatevars["username"] = $userdata[0]["username"];
+					$this->template = "403";
+					$this->set_vars();
+					return FALSE;
 				}
 				else
 				{
-					$this->template = "400";
-					$this->set_vars();
-					return FALSE;
+					$userdata = phplogin_model::get_contactdata( $this->phplogin_userid );
+					if ( $userdata["Success"] == TRUE )
+					{
+						$this->templatevars["username"] = $userdata[0]["username"];
+					}
+					else
+					{
+						$this->template = "400";
+						$this->set_vars();
+						return FALSE;
+					}
 				}
 				break;
 			case "edit_user":
