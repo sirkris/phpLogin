@@ -45,9 +45,23 @@ function phplogin_updateView( url, method, elementid )
 	http.send( null );
 }
 
-function loadTemplate()
+function loadTemplate( template )
 {
 	var baseurl = "view.phplogin.php?phplogin_template=";
 	
-	phplogin_updateView( baseurl + document.templateform.s_template.value, "GET", "phplogin_viewerdiv" );
+	if ( template == '' )
+	{
+		try
+		{
+			template = document.getElementById( "phplogin_template" ).value;
+		}
+		catch ( e )
+		{
+			return false;
+		}
+	}
+	
+	phplogin_updateView( baseurl + template, "GET", "phplogin_viewerdiv" );
+	
+	return true;
 }

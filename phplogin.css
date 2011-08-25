@@ -2,23 +2,17 @@
 {
 	border: 2px solid navy;
 	background-color: #DDEEFF;
-	width:  400px;
+	width: 100%;
 	text-align: center;
 	overflow: hidden;
-}
-.phplogin_logindivtitle
-{
-	border: 1px solid black;
-	color: cyan;
-	background-color: navy;
-	text-align: center;
-	font-family: Courier New, Courier, Verdana;
-	font-weight: bold;
-	width: 100%;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
 }
 .phplogin_logincaptionsdiv
 {
-	width: 33%;
+	width: 49%;
 	text-align: right;
 	font-weight: bold;
 	float: left;
@@ -33,7 +27,7 @@
 .phplogin_loginfieldsdiv
 {
 	float: left;
-	width: 65%;
+	width: 49%;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	text-align: left;
@@ -48,6 +42,11 @@
 	padding-bottom: 5px;
 	text-align: center;
 	width: 100%;
+}
+.phplogin_loginrowdiv
+{
+	height: 27px;
+	font-size: 12pt;
 }
 
 .phplogin_registerdiv
@@ -549,4 +548,25 @@
 .phplogin_xdiv a:hover
 {
 	color: white;
+}
+.phplogin_textdiv
+{
+	color: navy;
+	text-align: center;
+	font-family: Verdana, Times New Roman, Arial;
+	font-size: 10pt;
+}
+.phplogin_textdiv a
+{
+	text-decoration: none;
+	color: darkgreen;
+}
+.phplogin_textdiv a:hover
+{
+	color: blue;
+}
+.phplogin_textdivbold
+{
+	font-size: 12pt;
+	font-weight: bold;
 }
