@@ -170,8 +170,7 @@ class phplogin_controller
 				}
 				if ( phplogin_model::is_loggedon() )
 				{
-					// TODO - Replace URL with AJAX JS.  --Kris
-					$this->templatevars["contact"] = "[ <a href=\"contact.frontend.phplogin.php?phplogin_userid=" . $victimdata[0]["userid"] . "\">Send Message</a> ]";
+					$this->templatevars["contact"] = "[ <a href=\"#\" onClick=\"loadTemplate( 'contact', 'phplogin_userid=" . $victimdata[0]["userid"] . "' );\">Send Message</a> ]";
 				}
 				else
 				{
@@ -179,8 +178,7 @@ class phplogin_controller
 				}
 				if ( phplogin_model::is_superior( $victimdata[0]["userid"] ) )
 				{
-					// TODO - Replace URL with AJAX JS.  --Kris
-					$this->templatevars["editlink"] = "[ <a href=\"manage_users.frontend.phplogin.php?phplogin_userid=" . $victimdata[0]["userid"] . "\">Edit User</a> ]";
+					$this->templatevars["editlink"] = "[ <a href=\"#\" onClick=\"loadTemplate( 'manage_users', 'phplogin_userid=" . $victimdata[0]["userid"] . "' );\">Edit User</a> ]";
 				}
 				else
 				{

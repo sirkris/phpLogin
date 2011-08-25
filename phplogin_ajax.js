@@ -45,7 +45,7 @@ function phplogin_updateView( url, method, elementid )
 	http.send( null );
 }
 
-function loadTemplate( template )
+function loadTemplate( template, params )
 {
 	var baseurl = "view.phplogin.php?phplogin_template=";
 	
@@ -59,6 +59,11 @@ function loadTemplate( template )
 		{
 			return false;
 		}
+	}
+	
+	if ( params != '' )
+	{
+		template += "&" + params;
 	}
 	
 	phplogin_updateView( baseurl + template, "GET", "phplogin_viewerdiv" );
