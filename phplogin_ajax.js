@@ -44,3 +44,10 @@ function phplogin_updateView( url, method, elementid )
 	}
 	http.send( null );
 }
+
+function loadTemplate()
+{
+	var baseurl = "view.phplogin.php?phplogin_template=";
+	
+	phplogin_updateView( baseurl + document.templateform.s_template.value, "GET", "phplogin_viewerdiv" );
+}
