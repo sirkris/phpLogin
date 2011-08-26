@@ -46,10 +46,8 @@ class phplogin_controller
 						default:
 							$arg = $res["template"];
 							break;
-						case "___CLOSEVIEWER___":
-							// TODO - Close the viewer window automatically.  --Kris
 						case "___REFRESH___":
-							// TODO - Close viewer and update some or all of page; possibly via refresh if attached to non-AJAX app.  --Kris
+							// TODO - Update some or all of page; possibly via refresh if attached to non-AJAX app.  --Kris
 							break;
 					}
 				}
