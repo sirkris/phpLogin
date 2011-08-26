@@ -48,6 +48,17 @@ class phplogin_controller
 							break;
 						case "___REFRESH___":
 							// TODO - Update some or all of page; possibly via refresh if attached to non-AJAX app.  --Kris
+							if ( isset( $res["message_title"] ) && isset( $res["message"] ) )
+							{
+								$arg = "message";
+								$this->message_title = $res["message_title"];
+								$this->message = $res["message"];
+							}
+							/* Message is required to be returned for this template alias.  --Kris */
+							else
+							{
+								$arg = "400";
+							}
 							break;
 					}
 				}
@@ -183,6 +194,10 @@ class phplogin_controller
 				{
 					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userlist();
 				}
+				break;
+			case "message":
+				$this->templatevars["message_title"] = $this->message_title;
+				$this->templatevars["message"] = $this->message;
 				break;
 			case "register":
 				$this->templatevars["action"] = "#";

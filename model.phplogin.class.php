@@ -179,7 +179,7 @@ class phplogin_model
 			return array( "template" => "login", "errmsg" => $res["Reason"] );
 		}
 		
-		return array( "template" => "___REFRESH___" );
+		return array( "template" => "___REFRESH___", "message_title" => "Welcome back!", "message" => "You have successfully logged-in!" );
 	}
 	
 	/* Dispatch user logout request.  --Kris */
