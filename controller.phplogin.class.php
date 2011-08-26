@@ -9,7 +9,7 @@ class phplogin_controller
 		
 		$args = func_get_args();
 		
-		if ( empty( $args ) || !isset( $args[0] ) || !isset( $args[0]["phplogin_template"] ) )
+		if ( empty( $args ) || !isset( $args[0] ) || ( !isset( $args[0]["phplogin_template"] ) && !isset( $args[0]["phplogin_formid"] ) ) )
 		{
 			$this->template = "400";  //Bad request.  --Kris
 			
@@ -25,7 +25,15 @@ class phplogin_controller
 				}
 			}
 			
-			$arg = $args[0]["phplogin_template"];
+			/* If we're dealing with a form submission, query the model then route to the appropriate template.  --Kris */
+			if ( isset( $args[0]["phplogin_formid"] ) )
+			{
+				//TODO
+			}
+			else
+			{
+				$arg = $args[0]["phplogin_template"];
+			}
 			
 			$template = new phplogin_templates();
 			if ( $template->exists( $arg ) )
@@ -185,7 +193,7 @@ class phplogin_controller
 				}
 				if ( phplogin_model::is_loggedon() )
 				{
-					$this->templatevars["contact"] = "[ <a href=\"#\" onClick=\"loadTemplate( 'contact', 'phplogin_userid=" . $victimdata[0]["userid"] . "' );\">Send Message</a> ]";
+					$this->templatevars["contact"] = "[ <a href=\"#\" onClick=\"phplogin_loadTemplate( 'contact', 'phplogin_userid=" . $victimdata[0]["userid"] . "' );\">Send Message</a> ]";
 				}
 				else
 				{
@@ -193,7 +201,7 @@ class phplogin_controller
 				}
 				if ( phplogin_model::is_superior( $victimdata[0]["userid"] ) )
 				{
-					$this->templatevars["editlink"] = "[ <a href=\"#\" onClick=\"loadTemplate( 'manage_users', 'phplogin_userid=" . $victimdata[0]["userid"] . "' );\">Edit User</a> ]";
+					$this->templatevars["editlink"] = "[ <a href=\"#\" onClick=\"phplogin_loadTemplate( 'manage_users', 'phplogin_userid=" . $victimdata[0]["userid"] . "' );\">Edit User</a> ]";
 				}
 				else
 				{

@@ -2,13 +2,17 @@
 
 require( "config.phplogin.php" );
 
-if ( !isset( $_POST ) || empty( $_POST ) )
+$vars = array();
+foreach ( $_GET as $getkey => $getval )
 {
-	$controller = new phplogin_controller( $_GET );
+	$vars[$getkey] = $getval;
 }
-else
+
+foreach ( $_POST as $postkey => $postval )
 {
-	$controller = new phplogin_controller( $_POST );
+	$vars[$postkey] = $postval;
 }
+
+$controller = new phplogin_controller( $vars );
 
 $controller->send_view();

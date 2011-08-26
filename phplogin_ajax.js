@@ -24,28 +24,33 @@ function phplogin_getHTTPObject()
 	}
 }
 
-function phplogin_updateView( url, method, elementid )
+function phplogin_updateView( url, method, elementId, postData )
 {
 	if ( url == "NULL" )
 	{
-		document.getElementById( elementid ).innerHTML = "";
+		document.getElementById( elementId ).innerHTML = "";
 		return;
 	}
 	
 	var http = phplogin_getHTTPObject();
 	
 	http.open( method, url, true );
+	http.setRequestHeader( "User-Agent", "XMLHTTP/1.0" );
+	if ( postData != '' )
+	{
+		http.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+	}
 	http.onreadystatechange = function()
 	{
 		if ( http.readyState == 4 )
 		{
-			document.getElementById( elementid ).innerHTML = http.responseText;
+			document.getElementById( elementId ).innerHTML = http.responseText;
 		}
 	}
-	http.send( null );
+	http.send( postData );
 }
 
-function loadTemplate( template, params )
+function phplogin_loadTemplate( template, params )
 {
 	var baseurl = "view.phplogin.php?phplogin_template=";
 	
@@ -66,7 +71,33 @@ function loadTemplate( template, params )
 		template += "&" + params;
 	}
 	
-	phplogin_updateView( baseurl + template, "GET", "phplogin_viewerdiv" );
+	phplogin_updateView( baseurl + template, "GET", "phplogin_viewerdiv", '' );
+	
+	return true;
+}
+function phplogin_sendForm( form )
+{
+	var postData = '';
+	
+	for ( i = 0; i < form.elements.length; i++ )
+	{
+		if ( postData != '' )
+		{
+			postData += "&";
+		}
+		
+		postData += form.elements[i].name + "=" + encodeURIComponent( form.elements[i].value );
+	}
+	
+	if ( postData != '' )
+	{
+		postData += "&";
+	}
+	
+	postData += "phplogin_formid=" + encodeURIComponent( form.id );
+	
+	/* The controller will route the request based on the phplogin_formid that was sent.  --Kris */
+	phplogin_updateView( "view.phplogin.php", "POST", "phplogin_viewerdiv", postData );
 	
 	return true;
 }

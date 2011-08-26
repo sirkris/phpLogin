@@ -1,6 +1,6 @@
 <!-- Begin {@phpLoginTemplateName} template for phpLogin. -->
 <div class="phplogin_containerdiv">
-<form name="phpLogin_login" id="phpLogin_login" action="{@action}" method="POST">
+<form name="phpLogin_login" id="phpLogin_login" onSubmit="phplogin_sendForm( this ); return false;">
 <div class="phplogin_logindiv">
 <div class="phplogin_titlediv">
 Login
@@ -35,7 +35,7 @@ Password:
 </div>
 <br />
 <div class="phplogin_textdiv">
-<a href="#" onClick="loadTemplate( 'reset_password' );">I forgot my username and/or password!</a>
+<a href="#" onClick="phplogin_loadTemplate( 'reset_password' );">I forgot my username and/or password!</a>
 </div>
 <br />
 <div class="phplogin_textdiv">
@@ -44,7 +44,7 @@ Password:
 <br />
 <div class="phplogin_textdiv">
 <div class="phplogin_textdivbold">
-<a href="#" onClick="loadTemplate( 'register' );">--&gt; Register! &lt;--</a>
+<a href="#" onClick="phplogin_loadTemplate( 'register' );">--&gt; Register! &lt;--</a>
 </div>
 </div>
 <br />
