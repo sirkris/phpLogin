@@ -28,7 +28,31 @@ class phplogin_controller
 			/* If we're dealing with a form submission, query the model then route to the appropriate template.  --Kris */
 			if ( isset( $args[0]["phplogin_formid"] ) )
 			{
-				//TODO
+				$res = phplogin_model::dispatch( $this->phplogin_formid, $args[0] );
+				
+				if ( isset( $res["errmsg"] ) )
+				{
+					$this->errmsg = $res["errmsg"];
+				}
+				
+				if ( !isset( $res["template"] ) )
+				{
+					$this->template = "400";
+				}
+				else
+				{
+					switch ( $res["template"] )
+					{
+						default:
+							$arg = $res["template"];
+							break;
+						case "___CLOSEVIEWER___":
+							// TODO - Close the viewer window automatically.  --Kris
+						case "___REFRESH___":
+							// TODO - Close viewer and update some or all of page; possibly via refresh if attached to non-AJAX app.  --Kris
+							break;
+					}
+				}
 			}
 			else
 			{
