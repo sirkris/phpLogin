@@ -138,4 +138,59 @@ class phplogin_model
 		
 		return $user->userdata["status"];
 	}
+	
+	/* Our dispatch function.  See config.dispatch.phplogin.php for accepted functions.  --Kris */
+	public static function dispatch( $func, $args = array() )
+	{
+		require( "config.phplogin.php" );
+		
+		if ( !isset( $phplogin_dispatch[$func] ) )
+		{
+			return array( "Success" => FALSE, "Reason" => "Access denied by dispatch.", "template" => "403" );
+		}
+		
+		return call_user_func_array( array( self, $phplogin_dispatch[$func] ), $args );
+	}
+	
+	/*
+	 * **** All methods below are the dispatch functions linked to our template forms. ****
+	 */
+	
+	/* Dispatch user login request.  --Kris */
+	public static function phplogin_login( $args = array() )
+	{
+		if ( !isset( $args["username"] ) || !isset( $args["password"] ) || trim( $args["username"] ) == NULL || trim( $args["password"] ) == NULL )
+		{
+			return array( "Success" => FALSE, "Reason" => "Username and password are required!", "template" => "login" );
+		}
+		else if ( self::is_loggedon() == TRUE )
+		{
+			return array( "Success" => FALSE, "Reason" => "You are already logged-in!", "template" => "___REFRESH___" );
+		}
+		
+		require( "config.phplogin.php" );
+		
+		$user = new phplogin_user();
+		
+		$res = $user->login( $args["username"], $args["password"] );
+		
+		if ( $res["Success"] == FALSE )
+		{
+			return array( "template" => "login", "Success" => FALSE, "Reason" => $res["Reason"] );
+		}
+		
+		return array( "template" => "___REFRESH___", "message_title" => "Welcome back!", "message" => "You have successfully logged-in!", "Success" => TRUE );
+	}
+	
+	/* Dispatch user logout request.  --Kris */
+	public static function phplogin_logout()
+	{
+		require( "config.phplogin.php" );
+		
+		$user = new phplogin_user();
+		
+		$res = $user->logout();
+		
+		return array( "template" => "___REFRESH___" );
+	}
 }

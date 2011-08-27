@@ -2,23 +2,17 @@
 {
 	border: 2px solid navy;
 	background-color: #DDEEFF;
-	width:  400px;
+	width: 100%;
 	text-align: center;
 	overflow: hidden;
-}
-.phplogin_logindivtitle
-{
-	border: 1px solid black;
-	color: cyan;
-	background-color: navy;
-	text-align: center;
-	font-family: Courier New, Courier, Verdana;
-	font-weight: bold;
-	width: 100%;
+	position: absolute;
+	top: 30%;
+	left: 0px;
+	font-size: 1pt;
 }
 .phplogin_logincaptionsdiv
 {
-	width: 33%;
+	width: 49%;
 	text-align: right;
 	font-weight: bold;
 	float: left;
@@ -33,7 +27,7 @@
 .phplogin_loginfieldsdiv
 {
 	float: left;
-	width: 65%;
+	width: 49%;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	text-align: left;
@@ -49,6 +43,11 @@
 	text-align: center;
 	width: 100%;
 }
+.phplogin_loginrowdiv
+{
+	height: 27px;
+	font-size: 12pt;
+}
 
 .phplogin_registerdiv
 {
@@ -61,17 +60,6 @@
 	top: 30%;
 	left: 0px;
 	font-size: 1pt;
-}
-.phplogin_registerdivtitle
-{
-	border: 1px solid black;
-	color: cyan;
-	background-color: navy;
-	text-align: center;
-	font-family: Courier New, Courier, Verdana;
-	font-weight: bold;
-	font-size: 12pt;
-	width: 100%;
 }
 .phplogin_registercaptionsdiv
 {
@@ -106,17 +94,6 @@
 	text-align: center;
 	width: 100%;
 }
-.phplogin_registercontainerdiv
-{
-	text-align: center;
-	float: left;
-	display: inline-block;
-	clear: left;
-	width: 40%;
-	position: relative;
-	left: 30%;
-	height: 100%;
-}
 .phplogin_registerrowdiv
 {
 	height: 27px;
@@ -134,17 +111,6 @@
 	top: 30%;
 	left: 0px;
 	font-size: 1pt;
-}
-.phplogin_edituserdivtitle
-{
-	border: 1px solid black;
-	color: cyan;
-	background-color: navy;
-	text-align: center;
-	font-family: Courier New, Courier, Verdana;
-	font-weight: bold;
-	font-size: 12pt;
-	width: 100%;
 }
 .phplogin_editusercaptionsdiv
 {
@@ -179,17 +145,6 @@
 	text-align: center;
 	width: 100%;
 }
-.phplogin_editusercontainerdiv
-{
-	text-align: center;
-	float: left;
-	display: inline-block;
-	clear: left;
-	width: 40%;
-	position: relative;
-	left: 30%;
-	height: 100%;
-}
 .phplogin_edituserrowdiv
 {
 	height: 27px;
@@ -207,17 +162,6 @@
 	top: 30%;
 	left: 0px;
 	font-size: 1pt;
-}
-.phplogin_changepassworddivtitle
-{
-	border: 1px solid black;
-	color: cyan;
-	background-color: navy;
-	text-align: center;
-	font-family: Courier New, Courier, Verdana;
-	font-weight: bold;
-	font-size: 12pt;
-	width: 100%;
 }
 .phplogin_changepasswordcaptionsdiv
 {
@@ -252,17 +196,6 @@
 	text-align: center;
 	width: 100%;
 }
-.phplogin_changepasswordcontainerdiv
-{
-	text-align: center;
-	float: left;
-	display: inline-block;
-	clear: left;
-	width: 40%;
-	position: relative;
-	left: 30%;
-	height: 100%;
-}
 .phplogin_changepasswordrowdiv
 {
 	height: 27px;
@@ -280,17 +213,6 @@
 	top: 30%;
 	left: 0px;
 	font-size: 1pt;
-}
-.phplogin_resetpassworddivtitle
-{
-	border: 1px solid black;
-	color: cyan;
-	background-color: navy;
-	text-align: center;
-	font-family: Courier New, Courier, Verdana;
-	font-weight: bold;
-	font-size: 12pt;
-	width: 100%;
 }
 .phplogin_resetpasswordcaptionsdiv
 {
@@ -325,17 +247,6 @@
 	text-align: center;
 	width: 100%;
 }
-.phplogin_resetpasswordcontainerdiv
-{
-	text-align: center;
-	float: left;
-	display: inline-block;
-	clear: left;
-	width: 40%;
-	position: relative;
-	left: 30%;
-	height: 100%;
-}
 .phplogin_resetpasswordrowdiv
 {
 	height: 27px;
@@ -353,17 +264,6 @@
 	top: 30%;
 	left: 0px;
 	font-size: 1pt;
-}
-.phplogin_manageusersdivtitle
-{
-	border: 1px solid black;
-	color: cyan;
-	background-color: navy;
-	text-align: center;
-	font-family: Courier New, Courier, Verdana;
-	font-weight: bold;
-	font-size: 12pt;
-	width: 100%;
 }
 .phplogin_manageuserscaptionsdiv
 {
@@ -398,17 +298,6 @@
 	text-align: center;
 	width: 100%;
 }
-.phplogin_manageuserscontainerdiv
-{
-	text-align: center;
-	float: left;
-	display: inline-block;
-	clear: left;
-	width: 40%;
-	position: relative;
-	left: 30%;
-	height: 100%;
-}
 .phplogin_manageusersrowdiv
 {
 	height: 27px;
@@ -426,17 +315,6 @@
 	top: 30%;
 	left: 0px;
 	font-size: 1pt;
-}
-.phplogin_viewprofiledivtitle
-{
-	border: 1px solid black;
-	color: cyan;
-	background-color: navy;
-	text-align: center;
-	font-family: Courier New, Courier, Verdana;
-	font-weight: bold;
-	font-size: 12pt;
-	width: 100%;
 }
 .phplogin_viewprofilecaptionsdiv
 {
@@ -471,17 +349,6 @@
 	text-align: center;
 	width: 100%;
 }
-.phplogin_viewprofilecontainerdiv
-{
-	text-align: center;
-	float: left;
-	display: inline-block;
-	clear: left;
-	width: 40%;
-	position: relative;
-	left: 30%;
-	height: 100%;
-}
 .phplogin_viewprofilerowdiv
 {
 	height: 27px;
@@ -509,17 +376,6 @@
 	top: 30%;
 	left: 0px;
 	font-size: 1pt;
-}
-.phplogin_contactdivtitle
-{
-	border: 1px solid black;
-	color: cyan;
-	background-color: navy;
-	text-align: center;
-	font-family: Courier New, Courier, Verdana;
-	font-weight: bold;
-	font-size: 12pt;
-	width: 100%;
 }
 .phplogin_contactcaptionsdiv
 {
@@ -554,17 +410,6 @@
 	text-align: center;
 	width: 100%;
 }
-.phplogin_contactcontainerdiv
-{
-	text-align: center;
-	float: left;
-	display: inline-block;
-	clear: left;
-	width: 40%;
-	position: relative;
-	left: 30%;
-	height: 100%;
-}
 .phplogin_contactrowdiv
 {
 	height: 27px;
@@ -592,17 +437,6 @@
 	top: 30%;
 	left: 0px;
 	font-size: 1pt;
-}
-.phplogin_messagedivtitle
-{
-	border: 1px solid black;
-	color: cyan;
-	background-color: navy;
-	text-align: center;
-	font-family: Courier New, Courier, Verdana;
-	font-weight: bold;
-	font-size: 12pt;
-	width: 100%;
 }
 .phplogin_messagecaptionsdiv
 {
@@ -637,17 +471,6 @@
 	text-align: center;
 	width: 100%;
 }
-.phplogin_messagecontainerdiv
-{
-	text-align: center;
-	float: left;
-	display: inline-block;
-	clear: left;
-	width: 40%;
-	position: relative;
-	left: 30%;
-	height: 100%;
-}
 .phplogin_messagerowdiv
 {
 	height: 27px;
@@ -670,4 +493,85 @@
 	text-align: center;
 	width: 100%;
 	font-size: 12pt;
+}
+
+.phplogin_containerdiv
+{
+	text-align: center;
+	position: absolute;
+	left: 30%;
+	width: 40%;
+	top: 30%;
+	z-index: 9999;
+	visibility: visible;
+}
+.phplogin_viewerdiv
+{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 100%;
+	width: 100%;
+	z-index: -9999;
+	visibility: hidden;
+}
+.phplogin_titlediv
+{
+	border: 1px solid black;
+	color: cyan;
+	background-color: navy;
+	text-align: center;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 100%;
+}
+.phplogin_xdiv
+{
+	color: yellow;
+	background-color: navy;
+	text-align: right;
+	font-family: Courier New, Courier, Verdana;
+	font-weight: bold;
+	font-size: 12pt;
+	width: 10%;
+	position: absolute;
+	left: 90%;
+	top: 0px;
+	z-index: 10000;
+}
+.phplogin_xdiv a
+{
+	text-decoration: none;
+	color: yellow;
+}
+.phplogin_xdiv a:hover
+{
+	color: white;
+}
+.phplogin_textdiv
+{
+	color: navy;
+	text-align: center;
+	font-family: Verdana, Times New Roman, Arial;
+	font-size: 10pt;
+}
+.phplogin_textdiv a
+{
+	text-decoration: none;
+	color: darkgreen;
+}
+.phplogin_textdiv a:hover
+{
+	color: blue;
+}
+.phplogin_textdivbold
+{
+	font-size: 12pt;
+	font-weight: bold;
+}
+.phplogin_errordiv
+{
+	font-weight: bold;
+	color: red;
 }

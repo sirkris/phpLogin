@@ -9,7 +9,7 @@ class phplogin_controller
 		
 		$args = func_get_args();
 		
-		if ( empty( $args ) || !isset( $args[0] ) || !isset( $args[0]["phplogin_template"] ) )
+		if ( empty( $args ) || !isset( $args[0] ) || ( !isset( $args[0]["phplogin_template"] ) && !isset( $args[0]["phplogin_formid"] ) ) )
 		{
 			$this->template = "400";  //Bad request.  --Kris
 			
@@ -25,8 +25,60 @@ class phplogin_controller
 				}
 			}
 			
-			$arg = $args[0]["phplogin_template"];
-			
+			/* If we're dealing with a form submission, query the model then route to the appropriate template.  --Kris */
+			if ( isset( $args[0]["phplogin_formid"] ) )
+			{
+				$res = phplogin_model::dispatch( $this->phplogin_formid, $args[0] );
+				
+				if ( isset( $res["Success"] ) && $res["Success"] == FALSE )
+				{
+					$this->phplogin_errmsg = ( isset( $res["Reason"] ) ? $res["Reason"] : "An error has occurred." );
+				}
+				
+				if ( !isset( $res["template"] ) )
+				{
+					$arg = "400";
+				}
+				else
+				{
+					switch ( $res["template"] )
+					{
+						default:
+							$arg = $res["template"];
+							break;
+						case "___REFRESH___":
+							// TODO
+							// 
+							// This will eventually be replaced with a call being sent to the phpNova Bridge.  
+							// That script will then determine whether "refresh" means that the entire page 
+							// should be refreshed or if it means that a certain element or elements should be 
+							// updated through AJAX, etc.  It will all depend on the application (i.e. WordPress, 
+							// Drupal, etc) from which this action was initiated.
+							// 
+							// In the meantime, a simple JavaScript page refresh will do.
+							//
+							// --Kris
+							$this->JS = "<script language=\"JavaScript\">\r\nphplogin_refreshPage( 3000 );\r\n</script>";
+							if ( isset( $res["message_title"] ) && isset( $res["message"] ) )
+							{
+								$arg = "message";
+								$this->message_title = $res["message_title"];
+								$this->message = $res["message"];
+							}
+							/* Message is required to be returned for this template alias.  --Kris */
+							else
+							{
+								$arg = "400";
+							}
+							break;
+					}
+				}
+			}
+			else
+			{
+				$arg = $args[0]["phplogin_template"];
+			}
+			//$this->phplogin_errmsg = "DEBUG - $arg - " . $this->phplogin_formid . " - " . print_r( $res, TRUE );
 			$template = new phplogin_templates();
 			if ( $template->exists( $arg ) )
 			{
@@ -61,41 +113,56 @@ class phplogin_controller
 				break;
 			case "400";
 				$this->tempaltevars["getvars"] = $_GET;
-				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : "An error occurred generating the template." );
+				$this->templatevars["errmsg"] = ( isset( $this->phplogin_errmsg ) ? $this->phplogin_errmsg : "An error occurred generating the template." );
 				break;
 			case "403";
 				$this->tempaltevars["getvars"] = $_GET;
-				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : "Access denied." );
+				$this->templatevars["errmsg"] = ( isset( $this->phplogin_errmsg ) ? $this->phplogin_errmsg : "Access denied." );
 				break;
 			case "404":
 				$this->templatevars["templatefile"] = $template->filename( $this->template );
-				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : "The requested resource could not be found." );
+				$this->templatevars["errmsg"] = ( isset( $this->phplogin_errmsg ) ? $this->phplogin_errmsg : "The requested resource could not be found." );
 				break;
 			case "change_password":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Change Password";
-				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				$this->templatevars["errmsg"] = ( isset( $this->phplogin_errmsg ) ? $this->phplogin_errmsg : NULL );
+				if ( phplogin_model::is_loggedon() == FALSE )
+				{
+					$this->template = "403";
+					$this->set_vars();
+					return FALSE;
+				}
 				break;
 			case "contact":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Send Message";
-				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
-				$userdata = phplogin_model::get_contactdata( $this->phplogin_userid );
-				if ( $userdata["Success"] == TRUE )
+				$this->templatevars["errmsg"] = ( isset( $this->phplogin_errmsg ) ? $this->phplogin_errmsg : NULL );
+				if ( phplogin_model::is_loggedon() == FALSE )
 				{
-					$this->templatevars["username"] = $userdata[0]["username"];
+					$this->template = "403";
+					$this->set_vars();
+					return FALSE;
 				}
 				else
 				{
-					$this->template = "400";
-					$this->set_vars();
-					return FALSE;
+					$userdata = phplogin_model::get_contactdata( $this->phplogin_userid );
+					if ( $userdata["Success"] == TRUE )
+					{
+						$this->templatevars["username"] = $userdata[0]["username"];
+					}
+					else
+					{
+						$this->template = "400";
+						$this->set_vars();
+						return FALSE;
+					}
 				}
 				break;
 			case "edit_user":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Save Changes";
-				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				$this->templatevars["errmsg"] = ( isset( $this->phplogin_errmsg ) ? $this->phplogin_errmsg : NULL );
 				if ( phplogin_model::is_loggedon() == FALSE )
 				{
 					$this->template = "403";
@@ -111,13 +178,13 @@ class phplogin_controller
 			case "login":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Login";
-				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				$this->templatevars["errmsg"] = ( isset( $this->phplogin_errmsg ) ? $this->phplogin_errmsg : NULL );
 				break;
 			case "manage_users":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["action2"] = "#";
 				$this->templatevars["submit"] = "Save Changes";
-				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				$this->templatevars["errmsg"] = ( isset( $this->phplogin_errmsg ) ? $this->phplogin_errmsg : NULL );
 				if ( phplogin_model::is_loggedon() == FALSE || phplogin_model::get_status() < 2 
 					|| ( isset( $this->phplogin_userid ) && is_superior( $this->phplogin_userid ) == FALSE ) )
 				{
@@ -139,15 +206,20 @@ class phplogin_controller
 					$this->templatevars["userslist"] = phplogin_model::get_manage_users_userlist();
 				}
 				break;
+			case "message":
+				$this->templatevars["message_title"] = $this->message_title;
+				$this->templatevars["message"] = $this->message;
+				$this->templatevars["JS"] = ( isset( $this->JS ) ? $this->JS : NULL );
+				break;
 			case "register":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Submit Registration";
-				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				$this->templatevars["errmsg"] = ( isset( $this->phplogin_errmsg ) ? $this->phplogin_errmsg : NULL );
 				break;
 			case "reset_password":
 				$this->templatevars["action"] = "#";
 				$this->templatevars["submit"] = "Send Reset Link";
-				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				$this->templatevars["errmsg"] = ( isset( $this->phplogin_errmsg ) ? $this->phplogin_errmsg : NULL );
 				break;
 			case "view_profile":
 				if ( !isset( $this->phplogin_userid ) || !is_numeric( $this->phplogin_userid ) )
@@ -163,15 +235,14 @@ class phplogin_controller
 					$this->set_vars();
 					return FALSE;
 				}
-				$this->templatevars["errmsg"] = ( isset( $_POST["phplogin_errmsg"] ) ? $_POST["phplogin_errmsg"] : NULL );
+				$this->templatevars["errmsg"] = ( isset( $this->phplogin_errmsg ) ? $this->phplogin_errmsg : NULL );
 				foreach ( $victimdata[0] as $key => $value )
 				{
 					$this->templatevars[$key] = $value;
 				}
 				if ( phplogin_model::is_loggedon() )
 				{
-					// TODO - Replace URL with AJAX JS.  --Kris
-					$this->templatevars["contact"] = "[ <a href=\"contact.frontend.phplogin.php?phplogin_userid=" . $victimdata[0]["userid"] . "\">Send Message</a> ]";
+					$this->templatevars["contact"] = "[ <a href=\"#\" onClick=\"phplogin_loadTemplate( 'contact', 'phplogin_userid=" . $victimdata[0]["userid"] . "' );\">Send Message</a> ]";
 				}
 				else
 				{
@@ -179,8 +250,7 @@ class phplogin_controller
 				}
 				if ( phplogin_model::is_superior( $victimdata[0]["userid"] ) )
 				{
-					// TODO - Replace URL with AJAX JS.  --Kris
-					$this->templatevars["editlink"] = "[ <a href=\"manage_users.frontend.phplogin.php?phplogin_userid=" . $victimdata[0]["userid"] . "\">Edit User</a> ]";
+					$this->templatevars["editlink"] = "[ <a href=\"#\" onClick=\"phplogin_loadTemplate( 'manage_users', 'phplogin_userid=" . $victimdata[0]["userid"] . "' );\">Edit User</a> ]";
 				}
 				else
 				{
@@ -220,7 +290,7 @@ class phplogin_controller
 	}
 	
 	/* The primary controller function that passes to the view.  --Kris */
-	function send_view( $skipheader = FALSE, $skipfooter = FALSE )
+	function send_view( $skipheader = TRUE, $skipfooter = TRUE )
 	{
 		require( "config.phplogin.php" );
 		

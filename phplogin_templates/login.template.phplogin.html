@@ -1,24 +1,59 @@
 <!-- Begin {@phpLoginTemplateName} template for phpLogin. -->
-<form name="phpLogin_login" id="phpLogin_login" action="{@action}" method="POST">
+<div class="phplogin_containerdiv">
+<form name="phplogin_login" id="phplogin_login" onSubmit="phplogin_sendForm( this ); return false;">
 <div class="phplogin_logindiv">
-<div class="phplogin_logindivtitle">
+<div class="phplogin_titlediv">
 Login
 </div>
+<div class="phplogin_xdiv">
+<a href="#" onClick="phplogin_updateView( 'NULL', '', 'phplogin_viewerdiv' );">[X]</a>
+</div>
+<div class="phplogin_messagetextdiv">
+<div class="phplogin_errordiv">
 {@errmsg}
+</div>
+</div>
 <div class="phplogin_logincaptionsdiv">
+<div class="phplogin_loginrowdiv">
 Username:
+</div>
 <br />
+<div class="phplogin_loginrowdiv">
 Password:
+</div>
 </div>
 <div class="phplogin_loginspacerdiv">&nbsp;</div>
 <div class="phplogin_loginfieldsdiv">
-<input type="text" name="phplogin_username" id="phplogin_username" maxlength="255" />
+<div class="phplogin_loginrowdiv">
+<input type="text" name="phplogin_username" id="phplogin_username" maxlength="255" autofocus />
+</div>
 <br />
+<div class="phplogin_loginrowdiv">
 <input type="password" name="phplogin_password" id="phplogin_password" />
+</div>
 </div>
 <div class="phplogin_loginsubmitdiv">
 <input type="submit" name="phplogin_submit" id="phplogin_submit" value="{@submit}" />
 </div>
+<br />
+<div class="phplogin_textdiv">
+<a href="#" onClick="phplogin_loadTemplate( 'reset_password' );">I forgot my username and/or password!</a>
+</div>
+<br />
+<div class="phplogin_textdiv">
+&nbsp;
+</div>
+<br />
+<div class="phplogin_textdiv">
+<div class="phplogin_textdivbold">
+<a href="#" onClick="phplogin_loadTemplate( 'register' );">--&gt; Register! &lt;--</a>
+</div>
+</div>
+<br />
+<div class="phplogin_textdiv">
+&nbsp;
+</div>
 </div>
 </form>
+</div>
 <!-- End {@phpLoginTemplateName} template for phpLogin. -->
