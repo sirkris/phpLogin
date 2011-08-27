@@ -1,6 +1,6 @@
 <!-- Begin {@phpLoginTemplateName} template for phpLogin. -->
 <div class="phplogin_containerdiv">
-<form name="phpLogin_login" id="phpLogin_login" onSubmit="phplogin_sendForm( this ); return false;">
+<form name="phplogin_login" id="phplogin_login" onSubmit="phplogin_sendForm( this ); return false;">
 <div class="phplogin_logindiv">
 <div class="phplogin_titlediv">
 Login
@@ -9,7 +9,9 @@ Login
 <a href="#" onClick="phplogin_updateView( 'NULL', '', 'phplogin_viewerdiv' );">[X]</a>
 </div>
 <div class="phplogin_messagetextdiv">
+<div class="phplogin_errordiv">
 {@errmsg}
+</div>
 </div>
 <div class="phplogin_logincaptionsdiv">
 <div class="phplogin_loginrowdiv">
@@ -23,7 +25,7 @@ Password:
 <div class="phplogin_loginspacerdiv">&nbsp;</div>
 <div class="phplogin_loginfieldsdiv">
 <div class="phplogin_loginrowdiv">
-<input type="text" name="phplogin_username" id="phplogin_username" maxlength="255" />
+<input type="text" name="phplogin_username" id="phplogin_username" maxlength="255" autofocus />
 </div>
 <br />
 <div class="phplogin_loginrowdiv">

@@ -146,7 +146,7 @@ class phplogin_model
 		
 		if ( !isset( $phplogin_dispatch[$func] ) )
 		{
-			return FALSE;
+			return array( "Success" => FALSE, "Reason" => "Access denied by dispatch.", "template" => "403" );
 		}
 		
 		return call_user_func_array( array( self, $phplogin_dispatch[$func] ), $args );
@@ -157,15 +157,15 @@ class phplogin_model
 	 */
 	
 	/* Dispatch user login request.  --Kris */
-	public static function login( $args = array() )
+	public static function phplogin_login( $args = array() )
 	{
 		if ( !isset( $args["username"] ) || !isset( $args["password"] ) || trim( $args["username"] ) == NULL || trim( $args["password"] ) == NULL )
 		{
-			return array( "Success" => FALSE, "Reason" => "Username and password are required!" );
+			return array( "Success" => FALSE, "Reason" => "Username and password are required!", "template" => "login" );
 		}
 		else if ( self::is_loggedon() == TRUE )
 		{
-			return array( "Success" => FALSE, "Reason" => "You are already logged-in!" );
+			return array( "Success" => FALSE, "Reason" => "You are already logged-in!", "template" => "___REFRESH___" );
 		}
 		
 		require( "config.phplogin.php" );
@@ -176,14 +176,14 @@ class phplogin_model
 		
 		if ( $res["Success"] == FALSE )
 		{
-			return array( "template" => "login", "errmsg" => $res["Reason"] );
+			return array( "template" => "login", "Success" => FALSE, "Reason" => $res["Reason"] );
 		}
 		
-		return array( "template" => "___REFRESH___", "message_title" => "Welcome back!", "message" => "You have successfully logged-in!" );
+		return array( "template" => "___REFRESH___", "message_title" => "Welcome back!", "message" => "You have successfully logged-in!", "Success" => TRUE );
 	}
 	
 	/* Dispatch user logout request.  --Kris */
-	public static function logout()
+	public static function phplogin_logout()
 	{
 		require( "config.phplogin.php" );
 		
