@@ -29,7 +29,12 @@ function phplogin_updateView( url, method, elementId, postData )
 	if ( url == "NULL" )
 	{
 		document.getElementById( elementId ).innerHTML = "";
+		phplogin_lightenpage();
 		return;
+	}
+	else
+	{
+		phplogin_darkenpage();
 	}
 	
 	var http = phplogin_getHTTPObject();
@@ -108,4 +113,14 @@ function phplogin_sendEmptyDispatch( formid )
 function phplogin_refreshPage( delay )
 {
 	setTimeout( "location.reload( true );", delay );  // In milliseconds.  --Kris
+}
+function phplogin_darkenpage()
+{
+	document.getElementById( "phplogin_darkenbackground" ).style.zIndex = 9998;
+	document.getElementById( "phplogin_darkenbackground" ).style.visibility = "visible";
+}
+function phplogin_lightenpage()
+{
+	document.getElementById( "phplogin_darkenbackground" ).style.zIndex = -9998;
+	document.getElementById( "phplogin_darkenbackground" ).style.visibility = "hidden";
 }
