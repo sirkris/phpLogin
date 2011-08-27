@@ -80,6 +80,7 @@ function phplogin_loadTemplate( template, params )
 	
 	return true;
 }
+
 function phplogin_sendForm( form )
 {
 	var postData = '';
@@ -106,21 +107,36 @@ function phplogin_sendForm( form )
 	
 	return true;
 }
+
 function phplogin_sendEmptyDispatch( formid )
 {
 	return phplogin_updateView( "view.phplogin.php", "POST", "phplogin_viewerdiv", "phplogin_emptydispatch=1&phplogin_formid=" + formid );
 }
+
 function phplogin_refreshPage( delay )
 {
 	setTimeout( "location.reload( true );", delay );  // In milliseconds.  --Kris
 }
+
 function phplogin_darkenpage()
 {
 	document.getElementById( "phplogin_darkenbackground" ).style.zIndex = 9998;
 	document.getElementById( "phplogin_darkenbackground" ).style.visibility = "visible";
 }
+
 function phplogin_lightenpage()
 {
 	document.getElementById( "phplogin_darkenbackground" ).style.zIndex = -9998;
 	document.getElementById( "phplogin_darkenbackground" ).style.visibility = "hidden";
+}
+
+function phplogin_closeViewerFromBg()
+{
+	/* Hackish little trick to see if we should also do a refresh.  --Kris */
+	if ( document.getElementById( "phplogin_viewerdiv" ).innerHTML.indexOf( "phplogin_refreshPage" ) !== -1 )
+	{
+		phplogin_refreshPage( 50 );
+	}
+	
+	phplogin_updateView( 'NULL', '', 'phplogin_viewerdiv' );
 }
