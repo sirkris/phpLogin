@@ -101,3 +101,7 @@ function phplogin_sendForm( form )
 	
 	return true;
 }
+function phplogin_refreshPage( delay )
+{
+	setTimeout( "location.reload( true );", delay );  // In milliseconds.  --Kris
+}

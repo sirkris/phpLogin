@@ -47,7 +47,18 @@ class phplogin_controller
 							$arg = $res["template"];
 							break;
 						case "___REFRESH___":
-							// TODO - Update some or all of page; possibly via refresh if attached to non-AJAX app.  --Kris
+							// TODO
+							// 
+							// This will eventually be replaced with a call being sent to the phpNova Bridge.  
+							// That script will then determine whether "refresh" means that the entire page 
+							// should be refreshed or if it means that a certain element or elements should be 
+							// updated through AJAX, etc.  It will all depend on the application (i.e. WordPress, 
+							// Drupal, etc) from which this action was initiated.
+							// 
+							// In the meantime, a simple JavaScript page refresh will do.
+							//
+							// --Kris
+							$this->JS = "<script language=\"JavaScript\">\r\nphplogin_refreshPage( 3000 );\r\n</script>";
 							if ( isset( $res["message_title"] ) && isset( $res["message"] ) )
 							{
 								$arg = "message";
@@ -198,6 +209,7 @@ class phplogin_controller
 			case "message":
 				$this->templatevars["message_title"] = $this->message_title;
 				$this->templatevars["message"] = $this->message;
+				$this->templatevars["JS"] = ( isset( $this->JS ) ? $this->JS : NULL );
 				break;
 			case "register":
 				$this->templatevars["action"] = "#";
