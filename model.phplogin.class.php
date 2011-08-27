@@ -149,7 +149,7 @@ class phplogin_model
 			return array( "Success" => FALSE, "Reason" => "Access denied by dispatch.", "template" => "403" );
 		}
 		
-		return call_user_func_array( array( self, $phplogin_dispatch[$func] ), $args );
+		return call_user_func_array( array( self, $phplogin_dispatch[$func] ), array( $args ) );
 	}
 	
 	/*
@@ -159,7 +159,12 @@ class phplogin_model
 	/* Dispatch user login request.  --Kris */
 	public static function phplogin_login( $args = array() )
 	{
-		if ( !isset( $args["username"] ) || !isset( $args["password"] ) || trim( $args["username"] ) == NULL || trim( $args["password"] ) == NULL )
+		/* For convenience; allows sendEmptyDispatch() JS function to be used to generate login window without displaying an error.  --Kris */
+		if ( isset( $args["phplogin_emptydispatch"] ) && $args["phplogin_emptydispatch"] == 1 )
+		{
+			return array( "Success" => TRUE, "template" => "login" );
+		}
+		else if ( !isset( $args["phplogin_username"] ) || !isset( $args["phplogin_password"] ) || trim( $args["phplogin_username"] ) == NULL || trim( $args["phplogin_password"] ) == NULL )
 		{
 			return array( "Success" => FALSE, "Reason" => "Username and password are required!", "template" => "login" );
 		}
@@ -172,7 +177,7 @@ class phplogin_model
 		
 		$user = new phplogin_user();
 		
-		$res = $user->login( $args["username"], $args["password"] );
+		$res = $user->login( $args["phplogin_username"], $args["phplogin_password"] );
 		
 		if ( $res["Success"] == FALSE )
 		{
@@ -191,6 +196,6 @@ class phplogin_model
 		
 		$res = $user->logout();
 		
-		return array( "template" => "___REFRESH___" );
+		return array( "template" => "___REFRESH___", "message_title" => "Goodbye!", "message" => ( $res == TRUE ? "You have successfully logged-out!" : "You are already logged-out!" ), "Success" => TRUE );
 	}
 }

@@ -18,7 +18,7 @@ class phplogin_authenticate
 		$sql = new phplogin_sql();
 		$res = phplogin_authenticate::get_passhash( $username );
 		
-		$pwhash = $res["pwhash"];
+		$pwhash = $res[0]["pwhash"];
 		
 		$pwenc = phplogin_encryption::encrypt_string( $password, $pwhash );
 		

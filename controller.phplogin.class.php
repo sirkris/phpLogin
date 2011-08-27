@@ -55,10 +55,11 @@ class phplogin_controller
 							// updated through AJAX, etc.  It will all depend on the application (i.e. WordPress, 
 							// Drupal, etc) from which this action was initiated.
 							// 
-							// In the meantime, a simple JavaScript page refresh will do.
+							// In the meantime, a simple JavaScript page refresh will do.  Must be onClick() since 
+							// script tags won't work in innerHTML.
 							//
 							// --Kris
-							$this->JS = "<script language=\"JavaScript\">\r\nphplogin_refreshPage( 3000 );\r\n</script>";
+							$this->refresh = "phplogin_refreshPage( 1 );";
 							if ( isset( $res["message_title"] ) && isset( $res["message"] ) )
 							{
 								$arg = "message";
@@ -79,6 +80,7 @@ class phplogin_controller
 				$arg = $args[0]["phplogin_template"];
 			}
 			//$this->phplogin_errmsg = "DEBUG - $arg - " . $this->phplogin_formid . " - " . print_r( $res, TRUE );
+			//$this->phplogin_errmsg = "DEBUG2 - " . print_r( $args, TRUE );
 			$template = new phplogin_templates();
 			if ( $template->exists( $arg ) )
 			{
@@ -209,7 +211,7 @@ class phplogin_controller
 			case "message":
 				$this->templatevars["message_title"] = $this->message_title;
 				$this->templatevars["message"] = $this->message;
-				$this->templatevars["JS"] = ( isset( $this->JS ) ? $this->JS : NULL );
+				$this->templatevars["refresh"] = ( isset( $this->refresh ) ? $this->refresh : NULL );
 				break;
 			case "register":
 				$this->templatevars["action"] = "#";
