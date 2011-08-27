@@ -101,6 +101,10 @@ function phplogin_sendForm( form )
 	
 	return true;
 }
+function phplogin_sendEmptyDispatch( formid )
+{
+	return phplogin_updateView( "view.phplogin.php", "POST", "phplogin_viewerdiv", "phplogin_emptydispatch=1&phplogin_formid=" + formid );
+}
 function phplogin_refreshPage( delay )
 {
 	setTimeout( "location.reload( true );", delay );  // In milliseconds.  --Kris

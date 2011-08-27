@@ -79,6 +79,7 @@ class phplogin_controller
 				$arg = $args[0]["phplogin_template"];
 			}
 			//$this->phplogin_errmsg = "DEBUG - $arg - " . $this->phplogin_formid . " - " . print_r( $res, TRUE );
+			//$this->phplogin_errmsg = "DEBUG2 - " . print_r( $args, TRUE );
 			$template = new phplogin_templates();
 			if ( $template->exists( $arg ) )
 			{

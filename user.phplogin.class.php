@@ -184,6 +184,8 @@ class phplogin_user
 		
 		$affrows = $sql->query( "update phplogin_users set loggedon = 0, loggedonsince = '0', phpsessid = '' where phpsessid = ?", array( $sql->addescape( $session_id ) ), PHPLOGIN_SQL_RETURN_AFFECTEDROWS );
 		
+		$this->populate_session();
+		
 		return ( $affrows == 1 ? TRUE : FALSE );
 	}
 	
