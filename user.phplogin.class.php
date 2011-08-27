@@ -110,7 +110,7 @@ class phplogin_user
 			$_SESSION["phplogin_" . $sukey] = $suval;
 		}
 		
-		$_SESSION["phplogin_sessiontimeout"] = time() + $phplogin_session_repopulate();
+		$_SESSION["phplogin_sessiontimeout"] = time() + ($_SESSION["phplogin_timeoutmin"] * 60);
 	}
 	
 	/* Update the last action timestamp in the database (if enabled).  --Kris */
