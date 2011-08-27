@@ -502,7 +502,7 @@
 	left: 30%;
 	width: 40%;
 	top: 30%;
-	z-index: 9999;
+	z-index: 99999;
 	visibility: visible;
 }
 .phplogin_viewerdiv
@@ -512,7 +512,6 @@
 	top: 0px;
 	height: 100%;
 	width: 100%;
-	z-index: -9999;
 	visibility: hidden;
 }
 .phplogin_titlediv
@@ -574,4 +573,19 @@
 {
 	font-weight: bold;
 	color: red;
+}
+.phplogin_darkenbackground
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: -9998;
+	visibility: hidden;
+	background-color: #000000;
+	opacity: 0.7;
+	-moz-opacity: 0.70;
+	filter: alpha( opacity = 70 );
+	background-repeat: repeat;
 }
