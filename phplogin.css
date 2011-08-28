@@ -525,6 +525,9 @@
 	font-weight: bold;
 	font-size: 12pt;
 	width: 100%;
+	user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
 }
 .phplogin_xdiv
 {

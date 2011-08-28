@@ -1,3 +1,10 @@
+var phplogin_dragging = false;
+var phplogin_dragging_element;
+var phplogin_dragging_element_xpos_start = 0;
+var phplogin_dragging_element_ypos_start = 0;
+var phplogin_dragging_mouse_xpos_start = 0;
+var phplogin_dragging_mouse_ypos_start = 0;
+
 function phplogin_getHTTPObject()
 {
 	if ( typeof XMLHttpRequest != 'undefined' )
@@ -139,4 +146,79 @@ function phplogin_closeViewerFromBg()
 	}
 	
 	phplogin_updateView( 'NULL', '', 'phplogin_viewerdiv' );
+}
+
+/* Functions for clicking and dragging the window div.  Basically useless but awesome nonetheless.  --Kris */
+function phplogin_mouse_xpos( event )
+{
+	/*if ( event.offsetX )
+	{
+		return event.offsetX;
+	}
+	else
+	{
+		return event.pageX;
+	}*/
+	
+	return event.clientX;
+}
+
+function phplogin_mouse_ypos( event )
+{
+	/*if ( event.offsetY )
+	{
+		return event.offsetY;
+	}
+	else
+	{
+		return event.pageY;
+	}*/
+	
+	return event.clientY;
+}
+
+function phplogin_mouseDown( event, element )
+{
+	phplogin_dragging = true;
+	phplogin_dragging_element = element;
+	document.getElementById( element ).style.cursor = "move";
+	phplogin_dragging_mouse_xpos_start = phplogin_mouse_xpos( event );
+	phplogin_dragging_mouse_ypos_start = phplogin_mouse_ypos( event );
+	
+	// TODO - This is due to us not knowing the pixel coords of the viewer div.  I think JQuery has solved this.  Will investigate later.  --Kris
+	phplogin_dragging_element_xpos_start = phplogin_dragging_mouse_xpos_start;
+	phplogin_dragging_element_ypos_start = phplogin_dragging_mouse_ypos_start;
+	
+	document.getElementById( element ).style.left = phplogin_dragging_element_xpos_start + "px";
+	document.getElementById( element ).style.top = phplogin_dragging_element_ypos_start + "px";
+}
+
+function phplogin_mouseMove( event )
+{
+	if ( phplogin_dragging == true )
+	{
+		var xdiff = phplogin_mouse_xpos( event ) - phplogin_dragging_mouse_xpos_start;
+		var ydiff = phplogin_mouse_ypos( event ) - phplogin_dragging_mouse_ypos_start;
+		
+		document.getElementById( phplogin_dragging_element ).style.left = (phplogin_dragging_element_xpos_start + xdiff) + "px";
+		document.getElementById( phplogin_dragging_element ).style.top = (phplogin_dragging_element_ypos_start + ydiff) + "px";
+		
+		return false;
+	}
+}
+
+function phplogin_mouseUp()
+{
+	if ( phplogin_dragging == true )
+	{
+		phplogin_dragging = false;
+		
+		document.getElementById( phplogin_dragging_element ).style.cursor = "auto";
+		
+		var xdiff = phplogin_mouse_xpos( event ) - phplogin_dragging_mouse_xpos_start;
+		var ydiff = phplogin_mouse_ypos( event ) - phplogin_dragging_mouse_ypos_start;
+		
+		document.getElementById( phplogin_dragging_element ).style.left = (phplogin_dragging_element_xpos_start + xdiff) + "px";
+		document.getElementById( phplogin_dragging_element ).style.top = (phplogin_dragging_element_ypos_start + ydiff) + "px";
+	}
 }
