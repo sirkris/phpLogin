@@ -513,6 +513,7 @@
 	height: 100%;
 	width: 100%;
 	visibility: hidden;
+	z-index: 9999;
 }
 .phplogin_titlediv
 {
